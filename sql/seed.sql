@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS empleados(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL, --samu
     puesto VARCHAR(50) NOT NULL,
     salario DECIMAL(10, 2) NOT NULL,
     fecha_contratacion DATE NOT NULL
@@ -11,8 +11,9 @@ CREATE TABLE IF NOT EXISTS empleados(
 CREATE TABLE IF NOT EXISTS clientes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL, --yago
     telefono VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS flujo_caja (
@@ -54,9 +55,7 @@ CREATE TABLE IF NOT EXISTS peliculas (
     id_pelicula INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
     genero VARCHAR(100) NOT NULL,
-    coste DECIMAL(3,2) NOT NULL,
-    fecha DATE NOT NULL,
-    hora TIME NOT NULL,
+    coste DECIMAL(3,2) NOT NULL, --jorge
     id_entrada INT NOT NULL,
     id_sala INT NOT NULL,
     FOREIGN KEY (id_sala) REFERENCES sala(id_sala),
@@ -76,7 +75,7 @@ CREATE TABLE IF NOT EXISTS entradas (
 );
 
 CREATE TABLE IF NOT EXISTS sala (
-    id_sala INT AUTO_INCREMENT PRIMARY KEY,
+    id_sala INT AUTO_INCREMENT PRIMARY KEY, --isma
     capacidad INT NOT NULL
 );
 
@@ -96,7 +95,7 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     nombre_pelicula VARCHAR(50) NOT NULL, 
 	fecha DATE NOT NULL,  
     hora_inicio TIME NOT NULL, 
-    hora_fin TIME NOT NULL,    
+    hora_fin TIME NOT NULL,
     id_sala INT NOT NULL, 
     id_pelicula INT NOT NULL , 
     id_entrada INT NOT NULL, 
@@ -105,8 +104,8 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     FOREIGN KEY(id_entrada) REFERENCES entrada(id_entrada)	 
 ); 
 
-CREATE TABLE IF NOT EXISTS precio_producto( 
-    id INT AUTO_INCREMENT PRIMARY KEY, 
-    nombre VARCHAR(50) NOT NULL, 
+CREATE TABLE IF NOT EXISTS precio_producto(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL, --isma
     precio DEC(5,2) NOT NULL
 ); 
