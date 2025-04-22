@@ -48,7 +48,6 @@ public class EmpleadoView {
         LocalDate localDate = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE);
         Date fechaContratacion = Date.valueOf(localDate); 
         
-
         Empleado empleado = new Empleado(nombre, apellido, telefono, email, puesto, salario, fechaContratacion);
 
 
