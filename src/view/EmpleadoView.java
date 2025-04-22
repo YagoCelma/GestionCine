@@ -1,4 +1,7 @@
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import model.Empleado;
 
@@ -32,14 +35,18 @@ public class EmpleadoView {
         String apellido = sc.nextLine();
         System.out.println("Telefono: ");
         int telefono = sc.nextInt();
+        sc.nextLine();
         System.out.println("Email: ");
         String email = sc.nextLine();
         System.out.println("Puesto: ");
         String puesto = sc.nextLine();
         System.out.println("Salario: ");
         double salario = sc.nextDouble();
+        sc.nextLine();
         System.out.println("Fecha contratacion (YYYY-MM-DD): ");
-        String fechaContratacion = sc.nextLine();
+        String fecha = sc.nextLine();
+        LocalDate localDate = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE);
+        Date fechaContratacion = Date.valueOf(localDate); 
 
         Empleado empleado = new Empleado(nombre, apellido, telefono, email, puesto, salario, fechaContratacion);
 

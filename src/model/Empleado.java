@@ -11,7 +11,7 @@ public class Empleado {
     private double salario;
     private Date fechaContratacion;
 
-    public Empleado(String nombre, String apellido, int telefono, String email, String puesto, int salario, Date fechaContratacion ){
+    public Empleado(String nombre, String apellido, int telefono, String email, String puesto, double salario, Date fechaContratacion ){
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
