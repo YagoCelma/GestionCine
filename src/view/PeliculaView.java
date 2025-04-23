@@ -56,9 +56,6 @@ public class PeliculaView {
         do {
             exito = false;
             try {
-                System.out.println("ID: ");
-                id = sc.next();
-
                 System.out.println("Título: ");
                 titulo = sc.next();
 
@@ -95,7 +92,6 @@ public class PeliculaView {
     }
 
     public void modificarPelicula() {
-        String id;
         int opcion;
         String nuevoTitulo;
         String nuevoDirector;
