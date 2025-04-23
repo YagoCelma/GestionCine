@@ -1,13 +1,17 @@
+package view;
 
+import dao.EmpleadoDao;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import model.Empleado;
 
 public class EmpleadoView {
 
     private final Scanner sc = new Scanner(System.in);
+    private final EmpleadoDao dao = new EmpleadoDao();
     
     public void gestionEmpleados(){
         int respuesta;
@@ -20,9 +24,13 @@ public class EmpleadoView {
             System.out.println("5. Actualizar empleado");
             System.out.println("6. Volver al menu principal");
             respuesta = sc. nextInt();
+            sc.nextLine();
 
             switch(respuesta){
-                case 1 -> agregarEmpleado();
+                case 1 -> this.agregarEmpleado();
+                case 2 -> this.eliminarEmpleado();
+                case 3 -> this.mostrarEmpleados();
+                case 4 -> this.buscarPorId();
             }
 
         } while(respuesta!= 6);
@@ -49,8 +57,44 @@ public class EmpleadoView {
         Date fechaContratacion = Date.valueOf(localDate); 
         
         Empleado empleado = new Empleado(nombre, apellido, telefono, email, puesto, salario, fechaContratacion);
-
-
+        EmpleadoDao empleadoDao = new EmpleadoDao();
+        empleadoDao.añadirEmpleado(empleadoDao);
+        System.out.println("Empleado añadido con ID: " + empleado.getId());
     }
+
+    public void eliminarEmpleado(){
+        System.out.println("Introduzca el Id del empleado a eliminar: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        EmpleadoDao empleadoDao = new EmpleadoDao();
+        if(empleadoDao.eliminarEmpleado(id)){
+            System.out.println("Empleado eliminado correctamente");
+        } else {
+            System.out.println("No se ha encontrado ningun empleado");
+        }
+    }
+
+    public void mostrarEmpleados(){
+        ArrayList<Empleado> empleados = dao.mostrarEmpleados();
+        System.out.println("\nLista de empleados: ");
+        for (Empleado emp : empleados){
+            System.out.println(emp);
+        }
+    }
+
+    public void buscarPorId(){
+        System.out.println("Introduzca el ID del empleado a buscar");
+        int id = sc.nextInt();
+        sc.nextLine();
+        Empleado emp = dao.obtenerPorId(id);
+        if(emp != null){
+            System.out.println(emp);
+        } else{
+            System.err.println("No se encontro ningun empleado con ese ID");
+        }
+    }
+
+    
+
 
 }

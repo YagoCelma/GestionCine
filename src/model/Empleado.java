@@ -1,3 +1,4 @@
+package model;
 import java.sql.Date;
 
 public class Empleado {
@@ -10,6 +11,10 @@ public class Empleado {
     private String puesto;
     private double salario;
     private Date fechaContratacion;
+
+    public Empleado(){
+        
+    }
 
     public Empleado(String nombre, String apellido, int telefono, String email, String puesto, double salario, Date fechaContratacion ){
         this.nombre = nombre;
