@@ -55,5 +55,9 @@ public class EmpleadoDao {
         Empleado emp = null;
         return emp;
     }
+
+    public boolean actualizarEmpleado(Empleado empleado){
+        return true;
+    }
     
 }

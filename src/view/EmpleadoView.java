@@ -31,8 +31,11 @@ public class EmpleadoView {
                 case 2 -> this.eliminarEmpleado();
                 case 3 -> this.mostrarEmpleados();
                 case 4 -> this.buscarPorId();
+                case 5 -> this.actualizarEmpleado();
+                case 6 -> System.out.println("Saliendo del menu de empleados...");
+                default -> System.out.println("Opción no valida, intentelo de nuevo");
             }
-
+            
         } while(respuesta!= 6);
     }
 
@@ -94,7 +97,50 @@ public class EmpleadoView {
         }
     }
 
-    
+    public void actualizarEmpleado(){
+        System.out.println("Introduce el ID del epleado a actualizar");
+        int id = sc.nextInt();
+        sc.nextLine();
+        EmpleadoDao empleadoDao = new EmpleadoDao();
+        Empleado empleado = empleadoDao.obtenerPorId(id);
+        if (empleado != null){
+            System.out.println("Introduce el nuevo nombre del empleado");
+            String nombre = sc.nextLine();
+            System.out.println("Introduce el nuevo apelido del empleado");
+            String apellido = sc.nextLine();
+            System.out.println("Introduce el nuevo telefono del empleado");
+            int tlf = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Introduce el nuevo email del empleado");
+            String email = sc.nextLine();
+            System.out.println("Introduce el nuevo puesto del empleado");
+            String puesto = sc.nextLine();
+            System.out.println("Introduce el nuevo salario del empleado");
+            double salario = sc.nextDouble();
+            sc.nextLine();
+            System.out.println("Introduce la nueva fecha de contratacion del empleado");
+            String fecha = sc.nextLine();
+            LocalDate localDate = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE);
+            Date fechaContratacion = Date.valueOf(localDate); 
+            
+            empleado.setNombre(nombre);
+            empleado.setApellido(apellido);
+            empleado.setTelefono(tlf);
+            empleado.setEmail(email);
+            empleado.setPuesto(puesto);
+            empleado.setSalario(salario);
+            empleado.setFechaContratacion(fechaContratacion);
+            
+            empleadoDao.actualizarEmpleado(empleado);
+            System.out.println("Empleado actualizado correctamente");
+            
+        } else {
+            System.out.println("No se encontro ningun empleado con ese ID");
+        }
+
+
+
+    }
 
 
 }
