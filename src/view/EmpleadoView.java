@@ -36,6 +36,7 @@ public class EmpleadoView {
                 default -> System.out.println("Opción no valida, intentelo de nuevo");
             }
             
+            
         } while(respuesta!= 6);
     }
 
