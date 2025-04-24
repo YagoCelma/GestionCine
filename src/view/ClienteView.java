@@ -21,7 +21,7 @@ public class ClienteView {
             sc.nextLine();
     
             switch(opcion){
-                case 1-> añadirClinete();
+                case 1-> añadirCliente();
                 case 2-> borrarCliente();
                 case 3-> modificarCliente();
                 case 4-> listarCliente();
