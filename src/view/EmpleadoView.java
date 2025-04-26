@@ -36,7 +36,6 @@ public class EmpleadoView {
                 default -> System.out.println("Opción no valida, intentelo de nuevo");
             }
             
-            
         } while(respuesta!= 6);
     }
 
@@ -62,7 +61,7 @@ public class EmpleadoView {
         
         Empleado empleado = new Empleado(nombre, apellido, telefono, email, puesto, salario, fechaContratacion);
         EmpleadoDao empleadoDao = new EmpleadoDao();
-        empleadoDao.añadirEmpleado(empleadoDao);
+        empleadoDao.añadirEmpleado(empleado);
         System.out.println("Empleado añadido con ID: " + empleado.getId());
     }
 
@@ -138,10 +137,5 @@ public class EmpleadoView {
         } else {
             System.out.println("No se encontro ningun empleado con ese ID");
         }
-
-
-
     }
-
-
 }

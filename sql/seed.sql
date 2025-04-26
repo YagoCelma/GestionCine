@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS empleados(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15) NOT NULL,
-    email VARCHAR(100) NOT NULL, --samu
+    telefono INT(15) NOT NULL,
+    email VARCHAR(100) NOT NULL, --samu  LOS TELEFONOS SON INT NO VARCHAR!!!
     puesto VARCHAR(50) NOT NULL,
     salario DECIMAL(10, 2) NOT NULL,
     fecha_contratacion DATE NOT NULL
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS clientes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL, --yago
-    telefono VARCHAR(15) NOT NULL,
+    telefono INT(15) NOT NULL,
     email VARCHAR(100) NOT NULL
 );
 
