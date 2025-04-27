@@ -53,5 +53,4 @@ public class Salas_peliculas{
         "}";
     }
 
-
 }
