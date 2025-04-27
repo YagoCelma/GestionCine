@@ -1,3 +1,5 @@
+package model;
+
 public class Cliente {
     
     private int id;
@@ -12,6 +14,10 @@ public class Cliente {
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.email = email;
+    }
+
+    public Cliente(){
+        
     }
 
     public int getId() {return id;}
