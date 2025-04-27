@@ -66,7 +66,7 @@ public class EmpleadoView {
     }
 
     public void eliminarEmpleado(){
-        System.out.println("Introduzca el Id del empleado a eliminar: ");
+        System.out.println("Introduzca el ID del empleado a eliminar: ");
         int id = sc.nextInt();
         sc.nextLine();
         EmpleadoDao empleadoDao = new EmpleadoDao();

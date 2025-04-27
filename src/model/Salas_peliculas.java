@@ -14,6 +14,8 @@ public class Salas_peliculas{
     private int id_pelicula;
     private int id_entrada;
 
+    public Salas_peliculas(){}
+
     public Salas_peliculas(String nombre, Date fecha, Time hora_inicio, Time hora_fin ){
         this.nombre = nombre;
         this.fecha = fecha;
