@@ -47,5 +47,78 @@ public class SalaView {
         System.out.println("Indique el numero de ID de la sala");
         int id = sc.nextInt();
         sc.nextLine();
+
+        SalaDAO salaDAO = new SalaDAO();
+        
+        if(salaDAO.borrarSala(id)){
+            System.out.println("Se ha eliminado la sala correctamente");
+        }else{
+            System.out.println("Error al eliminar la sala");
+        }
+    }
+
+    public void modificarSala(){
+        System.out.println("Indique el ID de la sala");
+        int id = sc.nextInt();
+        sc.nextLine();
+        
+        SalaDAO salaDAO = new SalaDAO();
+        Sala sala = salaDAO.salaPorID(id);
+
+        if(sala != null){
+            menuModificacion(sala);
+        }else{
+            System.out.println("Error, sala no encontrada");
+        }
+    }
+
+    public void menuModificacion(Sala sala){
+
+        int opcion;
+        do{
+            System.out.println("Menu de modificacion de las salas");
+            System.out.println("Que quieres modificar?");
+            System.out.println("1. Capacidad");
+            System.out.println("2. Salir");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch(opcion){
+                case 1-> modificarCapacidad(sala);
+                case 2-> System.out.println("Saliendo...");
+                default-> System.out.println("Valor no válido, vuelva a intentarlo");
+            }
+
+        }while(opcion != 2);
+    }
+
+    public void modificarCapacidad(Sala sala){
+        System.out.println("Introduce la nueva capacidad de al sala");
+        int capacidad = sc.nextInt();
+        sc.nextLine();
+        sala.setCapacidad(capacidad);
+    }
+
+    public void mostrarSala(){
+        System.out.println("Indica el numero de sala");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        SalaDAO salaDAO = new SalaDAO();
+        Sala sala = salaDAO.salaPorID(id);
+        
+        if(sala != null){
+            System.out.println(sala);
+        }else{
+            System.out.println("Error al encontrar la sala");
+        }
+    }
+
+    public void listarSalas(){
+        System.out.println("Listado de las salas");
+        SalaDAO salaDAO = new SalaDAO();
+        for(Sala sala : salaDAO.obtenerSala()){
+            System.out.println(sala);
+        }
     }
 }

@@ -113,6 +113,7 @@ public class ClienteView {
                 case 2-> actualizarApellido(cliente);
                 case 3-> actualizarTelefono(cliente);
                 case 4-> actualizarEmail(cliente);
+                case 5-> System.out.println("Saliendo...");
             }
         }while(opcion != 6);
     }

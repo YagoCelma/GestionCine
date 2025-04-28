@@ -9,6 +9,10 @@ public class Sala {
         this.capacidad = capacidad;
     }
 
+    public Sala(){
+        
+    }
+
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
 
