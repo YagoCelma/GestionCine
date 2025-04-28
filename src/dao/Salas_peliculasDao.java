@@ -1,9 +1,7 @@
 package dao;
 
-import java.rmi.StubNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
-import jdk.jfr.StackTrace;
 import model.Salas_peliculas;
 
 public class Salas_peliculasDao {
