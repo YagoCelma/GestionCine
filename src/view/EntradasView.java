@@ -2,19 +2,11 @@ package view;
 
 import java.util.Scanner;
 
-public class Entradas {
+public class EntradasView {
     Scanner sc = new Scanner(System.in);
-    // Atributos de la clase Entradas
-    private int idEntrada = 0;
-    private int precio = 0;
-    private String tipo = null;
-    private String fecha = null;
-    private String hora = null;
-    private String tipoEntrada = null;
-    private String nombrePelicula = null;
-    private String sala = null;
     
-    public void menuCliente(){
+    
+    public void menuEntrada(){
         int opcion;
         do{
             System.out.println("Menu de Entradas");
@@ -55,6 +47,39 @@ public class Entradas {
         System.out.println("Introduzca la sala");
         String sala = sc.nextLine();
 
-        // Crear un objeto Entrada y añadirlo a la base de datos
+        Entrada entrada = new Entrada(precio, tipo, fecha, hora, tipoEntrada, nombrePelicula, sala);
+        EntradaDAO entradaDAO = new EntradaDAO();
+        entradaDAO.añadirEntrada(entrada);
+        System.out.println("Entrada añadida correctamente con ID: " + entrada.getIdEntrada());
+
+        
     }
+    public void borrarEntrada(){
+        System.out.println("Introduzca el ID de la entrada a borrar");
+        int idEntrada = sc.nextInt();
+        sc.nextLine();
+
+
+        
+
+        
+    }
+    public void modificarEntrada(){
+        System.out.println("Introduzca el ID de la entrada a modificar");
+        int idEntrada = sc.nextInt();
+        sc.nextLine();
+        
+    }
+    public void listarEntrada(){
+        System.out.println("Lista de Entradas:");
+        
+    }
+
+    public void buscarEntradaID(){
+        System.out.println("Introduzca el ID de la entrada a buscar");
+        int idEntrada = sc.nextInt();
+        sc.nextLine();
+        
+    }
+   
 }
