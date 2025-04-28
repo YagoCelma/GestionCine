@@ -1,7 +1,7 @@
 package model;
 
 public class Pelicula {
-    String id;
+    int id;
     String titulo;
     String director;
     String genero;
@@ -14,7 +14,7 @@ public class Pelicula {
     public Pelicula() {
     }
 
-    public Pelicula(String id, String titulo, String director, String genero,
+    public Pelicula(int id, String titulo, String director, String genero,
             int duracion, String clasificacion, double precioEntrada, boolean enCartelera) {
         this.id = id;
         this.titulo = titulo;
@@ -29,7 +29,7 @@ public class Pelicula {
     }
 
     // Getters
-    public String getId() {
+    public int getId() {
         return id;
     }
 

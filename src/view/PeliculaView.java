@@ -22,9 +22,9 @@ public class PeliculaView {
 
             switch (elegirOpcion()) {
                 case 1 -> anadirPelicula();
-                // case 2 -> eliminarPelicula();
-                // case 3 -> modificarPelicula();
-                // case 4 ->
+                case 2 -> borrarPelicula();
+                case 3 -> modificarPelicula();
+                // case 4 -> listarPelicula();
                 case 5 -> System.exit(0);
                 default -> {
                     System.out.println("Opción no válida");
@@ -41,7 +41,6 @@ public class PeliculaView {
     }
 
     public Pelicula anadirPelicula() {
-        String id = "";
         String titulo = "";
         String director = "";
         String genero = "";
@@ -51,7 +50,6 @@ public class PeliculaView {
         boolean enCartelera = false;
 
         boolean exito;
-        String respuesta = "";
 
         do {
             exito = false;
@@ -77,7 +75,8 @@ public class PeliculaView {
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("¿Quieres volver a intentarlo?");
-                respuesta = sc.next();
+                
+                String respuesta = sc.next();
                 respuesta = respuesta.toLowerCase();
                 if (respuesta.equals("si")) {
                     exito = true;
@@ -88,10 +87,11 @@ public class PeliculaView {
         } while (exito);
         System.out.println(
                 "La pelicula se ha añadido correctamente");
-        return new Pelicula(id, titulo, director, genero, duracion, clasificacion, precioEntrada, enCartelera);
+        return new Pelicula(0, titulo, director, genero, duracion, clasificacion, precioEntrada, enCartelera); // El id se genera despues con el auto increment
     }
 
     public void modificarPelicula() {
+        int id;
         int opcion;
         String nuevoTitulo;
         String nuevoDirector;
@@ -107,7 +107,7 @@ public class PeliculaView {
             exito = false;
             try {
                 System.out.println("ID de la película: ");
-                id = sc.next();
+                id = sc.nextInt();
 
                 System.out.println("¿Qué quieres modificar?");
                 System.out.println("1. Título");
@@ -208,7 +208,7 @@ public class PeliculaView {
     }
 
     public void borrarPelicula() {
-        String id;
+        int id;
         String respuesta;
         boolean exito;
 
@@ -216,7 +216,7 @@ public class PeliculaView {
             exito = false;
             try {
                 System.out.println("ID de la película: ");
-                id = sc.next();
+                id = sc.nextInt();
 
                 System.out.println("La película ");
                 peliculaDAO.mostrarPeliculaByID(id);
