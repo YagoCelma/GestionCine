@@ -34,7 +34,7 @@ public class ClienteDAO{
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return true; 
+                return true;
             }
         }catch(Exception e){
             e.printStackTrace();
