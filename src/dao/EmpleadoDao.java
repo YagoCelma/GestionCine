@@ -8,7 +8,7 @@ public class EmpleadoDao {
 
     public void añadirEmpleado(Empleado empleado){
         try (Connection conn = ConexionDB.getConnection()){
-            String sql = "INSERT INTO empleados (nombre, apellido, telefono, email, puesto, salario, fechaContratacion) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO empleados (nombre, apellido, telefono, email, puesto, salario, fecha_contratacion) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, empleado.getNombre());
             stmt.setString(2, empleado.getApellido());
@@ -59,7 +59,7 @@ public class EmpleadoDao {
                 empleado.setEmail(resultSet.getString("email"));
                 empleado.setPuesto(resultSet.getString("puesto"));
                 empleado.setSalario(resultSet.getDouble("salario"));
-                empleado.setFechaContratacion(resultSet.getDate("FechaContratacion"));
+                empleado.setFechaContratacion(resultSet.getDate("fecha_contratacion"));
                 empleados.add(empleado);
             }
         } catch (SQLException e) {
@@ -90,7 +90,7 @@ public class EmpleadoDao {
 
     public void actualizarEmpleado(Empleado empleado){
         try (Connection conn = ConexionDB.getConnection()){
-            String sql = "UPDATE empleados SET nombre = ?, apellido = ?, telefono = ?, email = ?, puesto = ?, salario = ?, fechaContratacion = ? WHERE id = ? ";
+            String sql = "UPDATE empleados SET nombre = ?, apellido = ?, telefono = ?, email = ?, puesto = ?, salario = ?, fecha_contratacion = ? WHERE id = ? ";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, empleado.getNombre());
             statement.setString(1, empleado.getApellido());
