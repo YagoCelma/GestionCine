@@ -2,17 +2,17 @@ package model;
 
 public class Entrada {
         
-    private int idEntrada = 0;
-    private int precio = 0;
-    private String tipo = null;
-    private String fecha = null;
-    private String hora = null;
-    private String tipoEntrada = null;
-    private String nombrePelicula = null;
-    private String sala = null;
+    private int idEntrada;
+    private int precio;
+    private String tipo;
+    private String fecha;
+    private String hora;
+    private String tipoEntrada;
+    private String nombrePelicula;
+    private String sala;
     
-    public Entrada(int idEntrada, int precio, String tipo, String fecha, String hora, String tipoEntrada, String nombrePelicula, String sala) {
-        this.idEntrada = idEntrada;
+    public Entrada(int precio, String tipo, String fecha, String hora, String tipoEntrada, String nombrePelicula, String sala) {
+        
         this.precio = precio;
         this.tipo = tipo;
         this.fecha = fecha;
