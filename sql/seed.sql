@@ -94,9 +94,10 @@ CREATE TABLE IF NOT EXISTS pedidos (
 CREATE TABLE IF NOT EXISTS salas_peliculas( 
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nombre_pelicula VARCHAR(50) NOT NULL, 
-	fecha DATE NOT NULL,  
-    hora_inicio TIME NOT NULL, 
-    hora_fin TIME NOT NULL,
+	fecha_incio_emision DATE NOT NULL,  
+	fecha_fin_emision DATE NOT NULL,  
+    hora_inicio TIME NOT NULL,  
+    hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de emepezar una pelicula 
     id_sala INT NOT NULL, 
     id_pelicula INT NOT NULL , 
     id_entrada INT NOT NULL, 

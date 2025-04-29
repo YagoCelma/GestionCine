@@ -8,12 +8,13 @@ public class Salas_peliculasDao {
 
     public void agregarSalaPelicula(Salas_peliculas salas_peliculas){
         try(Connection conn = ConexionDB.getConnection()) {
-            String sql = "INSERT INTO salas_peliculas (nombre_pelicula, fecha, hora_inicio, hora_fin)  ";
+            String sql = "INSERT INTO salas_peliculas (nombre_pelicula, fecha_incio_emision, fecha_fin_emision, hora_inicio, hora_fin)  ";
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, salas_peliculas.getNombre());
-            stmt.setDate(2, salas_peliculas.getFecha());
-            stmt.setTime(3, salas_peliculas.getHora_inicio());
-            stmt.setTime(4, salas_peliculas.getHora_fin());
+            stmt.setDate(2, salas_peliculas.getfecha_inicio_emision());
+            stmt.setDate(3, salas_peliculas.getfecha_fin_emision());
+            stmt.setTime(4, salas_peliculas.getHora_inicio());
+            stmt.setTime(5, salas_peliculas.getHora_fin());
 
             stmt.executeUpdate();
             ResultSet keys = stmt.getGeneratedKeys();
