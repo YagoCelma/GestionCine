@@ -118,3 +118,12 @@ CREATE TABLE IF NOT EXISTS precio_producto(
     nombre VARCHAR(50) NOT NULL, --isma
     precio DEC(5,2) NOT NULL
 ); 
+
+
+CREATE TABLE IF NOT EXISTS inventario_pelicula (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    pelicula_id INT,
+    copias INT,
+    copias_disponibles INT,
+    FOREIGN KEY (pelicula_id) REFERENCES peliculas(id)
+);
