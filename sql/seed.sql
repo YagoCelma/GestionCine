@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS entradas (
     id_pelicula INT NOT NULL,
     tipo ENUM('descuento_nino', 'descuento_jubilado', 'normal'),
     precio DECIMAL(3, 2) NOT NULL,
-    hora TIME NOT NULL,
+    hora TIME NOT NULL, --andres
     fecha DATE NOT NULL,
     id_sala INT NOT NULL,
     FOREIGN KEY (id_sala) REFERENCES sala(id_sala),

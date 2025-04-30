@@ -44,7 +44,7 @@ public class PeliculaDAO {
 
     }
 
-    public void modificarTituloPelicula(String id, String nuevoTitulo) {
+    public void modificarTituloPelicula(int id, String nuevoTitulo) {
 
         Connection conexion = dao.ConexionDB.conectar();
 
@@ -63,7 +63,7 @@ public class PeliculaDAO {
 
     }
 
-    public void modificarDirectorPelicula(String id, String nuevoDirector) {
+    public void modificarDirectorPelicula(int id, String nuevoDirector) {
         Connection conexion = dao.ConexionDB.conectar();
         String query = "UPDATE peliculas SET director = ? WHERE id=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -75,7 +75,7 @@ public class PeliculaDAO {
         }
     }
 
-    public void modificarGeneroPelicula(String id, String nuevoGenero) {
+    public void modificarGeneroPelicula(int id, String nuevoGenero) {
         Connection conexion = dao.ConexionDB.conectar();
         String query = "UPDATE peliculas SET genero = ? WHERE id=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -87,7 +87,7 @@ public class PeliculaDAO {
         }
     }
 
-    public void modificarDuracionPelicula(String id, int nuevaDuracion) {
+    public void modificarDuracionPelicula(int id, int nuevaDuracion) {
         Connection conexion = dao.ConexionDB.conectar();
         String query = "UPDATE peliculas SET duracion = ? WHERE id=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -99,7 +99,7 @@ public class PeliculaDAO {
         }
     }
 
-    public void modificarClasificacionPelicula(String id, String nuevaClasificacion) {
+    public void modificarClasificacionPelicula(int id, String nuevaClasificacion) {
         Connection conexion = dao.ConexionDB.conectar();
         String query = "UPDATE peliculas SET clasificacion = ? WHERE id=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -111,7 +111,7 @@ public class PeliculaDAO {
         }
     }
 
-    public void modificarPrecioPelicula(String id, double nuevoPrecio) {
+    public void modificarPrecioPelicula(int id, double nuevoPrecio) {
         Connection conexion = dao.ConexionDB.conectar();
         String query = "UPDATE peliculas SET precio = ? WHERE id=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -123,7 +123,7 @@ public class PeliculaDAO {
         }
     }
 
-    public void modificarEnCartelera(String id, boolean nuevoEnCartelera) {
+    public void modificarEnCartelera(int id, boolean nuevoEnCartelera) {
         Connection conexion = dao.ConexionDB.conectar();
         String query = "UPDATE peliculas SET en_cartelera = ? WHERE id=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -135,11 +135,11 @@ public class PeliculaDAO {
         }
     }
 
-    public void mostrarPeliculas(String id) {
+    public void mostrarPeliculas() {
 
         Connection conexion = dao.ConexionDB.conectar();
 
-        String query = "SELECT * FROM peliculas WHERE id=" + id;
+        String query = "SELECT * FROM peliculas";
         try (Statement stmt = conexion.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 
@@ -162,7 +162,7 @@ public class PeliculaDAO {
         }
     }
 
-    public void mostrarPeliculaByID(String id) {
+    public void mostrarPeliculaByID(int id) {
 
         Connection conexion = dao.ConexionDB.conectar();
 
@@ -188,14 +188,14 @@ public class PeliculaDAO {
         }
     }
 
-    public void borrarPelicula(String id) {
+    public void borrarPelicula(int id) {
 
         Connection conexion = dao.ConexionDB.conectar();
 
         String query = "DELETE FROM peliculas WHERE id = ?";
 
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
-            stmt.setString(1, id);
+            stmt.setInt(1, id);
             stmt.executeUpdate();
             System.out.println("La película se ha eliminado con éxito");
         } catch (SQLException e) {
