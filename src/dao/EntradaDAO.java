@@ -79,6 +79,7 @@ public class EntradaDAO {
         }
         return entradas;
     }
+    
     public Entrada buscarEntradaPorID(int id) {
         Entrada entrada = null;
         String sql = "SELECT * FROM entradas WHERE id = ?";
