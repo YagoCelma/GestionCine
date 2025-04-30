@@ -1,7 +1,7 @@
 package view;
-import model.Entrada;
 import dao.EntradaDAO;
 import java.util.*;
+import model.Entrada;
 
 
 public class EntradasView {
@@ -51,7 +51,7 @@ public class EntradasView {
         Entrada entrada = new Entrada(precio, tipo, fecha, hora, tipoEntrada, nombrePelicula, sala);
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.añadirEntrada(entrada);
-        System.out.println("Entrada añadida correctamente con ID: " + entrada.getIdEntrada());
+        System.out.println("Entrada añadida correctamente con ID: " + entrada.getId());
 
         
     }
@@ -111,7 +111,7 @@ public class EntradasView {
         }while(opcion != 8);
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.modificarEntrada(entrada);
-        System.out.println("Entrada modificada correctamente con ID: " + entrada.getIdEntrada());
+        System.out.println("Entrada modificada correctamente con ID: " + entrada.getId());
     }
 
         
