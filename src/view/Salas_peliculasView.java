@@ -1,5 +1,5 @@
 package view;
-
+/* 
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ import dao.SalasDao;
 import dao.PeliculaDAO;
 
 public class Salas_peliculasView {
-    /* 
+    
     private final Scanner sc = new Scanner(System.in);
     private final Salas_peliculasDao dao = new Salas_peliculasDao();
     private final EmisionDAO emisionDao = new EmisionDAO();
@@ -188,5 +188,5 @@ public class Salas_peliculasView {
             System.out.println("No se encontró ninguna sala_pelicula con ese ID.");
         }
     }
-*/
-}
+
+}*/

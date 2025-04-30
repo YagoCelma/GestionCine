@@ -1,14 +1,14 @@
 package dao;
 
-import java.sql.*;
+/*import java.sql.*;
 import java.util.ArrayList;
 import model.Emision;
 
 public class EmisionDAO {
 
     public void agregarEmision(Emision emision){
-        try (Connection conn = conexionDB.getConnection()){
-            PreparedStatement stmt = conn.prepareStatement(sql);
+        try (Connection conn = ConexionDB.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement();
             String sql = "INSERT INTO emison (id, nombre, duracion, fecha_inicio_emision, fecha_fin_emision)";
             
             
@@ -23,4 +23,4 @@ public class EmisionDAO {
         return emision;
     }
     
-}
+}*/
