@@ -16,7 +16,6 @@ public class ClienteDAO{
             statement.setString(4, cliente.getEmail());
             statement.executeUpdate();
 
-            //Para el ID del auto-increment
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
                 int idGenerado = generatedKeys.getInt(1);

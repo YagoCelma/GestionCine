@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS empleados(
     apellido VARCHAR(100) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    telefono INT(15) NOT NULL,
+    email VARCHAR(100) NOT NULL, --samu 
     puesto VARCHAR(50) NOT NULL,
     salario DECIMAL(10, 2) NOT NULL,
     fecha_contratacion DATE NOT NULL
@@ -14,6 +16,8 @@ CREATE TABLE IF NOT EXISTS clientes(
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
+    apellido VARCHAR(100) NOT NULL, --yago
+    telefono INT(15) NOT NULL,
     email VARCHAR(100) NOT NULL
 );
 
@@ -94,19 +98,36 @@ CREATE TABLE IF NOT EXISTS pedidos (
 CREATE TABLE IF NOT EXISTS salas_peliculas( 
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nombre_pelicula VARCHAR(50) NOT NULL, 
-	fecha DATE NOT NULL,  
-    hora_inicio TIME NOT NULL, 
-    hora_fin TIME NOT NULL,
+	fecha_incio_emision DATE NOT NULL,  
+	fecha_fin_emision DATE NOT NULL,  
+    hora_inicio TIME NOT NULL,  
+    hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de emepezar una pelicula 
     id_sala INT NOT NULL, 
-    id_pelicula INT NOT NULL , 
-    id_entrada INT NOT NULL, 
+    id_pelicula INT NOT NULL ,  
     FOREIGN KEY (id_sala) REFERENCES sala(id_sala), 
-    FOREIGN KEY (id_pelicula) REFERENCES pelicula(id_pelicula),	 
-    FOREIGN KEY(id_entrada) REFERENCES entrada(id_entrada)	 
+    FOREIGN KEY (id_pelicula) REFERENCES pelicula(id_pelicula),	  
 ); 
+
+CREATE TABLE IF NOT EXISTS emision(
+    id
+    nombre
+    duracion
+    fecha_inicio_emision
+    fecha_fin_emision
+
+)
 
 CREATE TABLE IF NOT EXISTS precio_producto(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL, --isma
     precio DEC(5,2) NOT NULL
 ); 
+
+
+CREATE TABLE IF NOT EXISTS inventario_pelicula (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    pelicula_id INT,
+    copias INT,
+    copias_disponibles INT,
+    FOREIGN KEY (pelicula_id) REFERENCES peliculas(id)
+);
