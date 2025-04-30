@@ -41,7 +41,7 @@ public class EntradasView {
         String fecha = sc.nextLine();
         System.out.println("Introduzca la hora");
         String hora = sc.nextLine();
-        System.out.println("Introduzca el tipo de entrada (normal o VIP)");
+        System.out.println("Introduzca el tipo de entrada (normal, niño o jubilados)");
         String tipoEntrada = sc.nextLine();
         System.out.println("Introduzca el nombre de la pelicula");
         String nombrePelicula = sc.nextLine();
@@ -90,7 +90,7 @@ public class EntradasView {
             System.out.println("2. Modificar tipo");
             System.out.println("3. Modificar fecha");
             System.out.println("4. Modificar hora");
-            System.out.println("5. Modificar tipo de entrada (normal, niño o mayores)=)");
+            System.out.println("5. Modificar tipo de entrada (normal, niño o jubilados)");
             System.out.println("6. Modificar nombre de la pelicula");
             System.out.println("7. Modificar sala");
             System.out.println("8. Salir");
