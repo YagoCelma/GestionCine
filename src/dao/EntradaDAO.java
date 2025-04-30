@@ -23,19 +23,23 @@ public class EntradaDAO {
         }
     }
 
-    public boolean borrarEntrada(int idEntrada) {
+    public boolean borrarEntrada(int id) {
         String sql = "DELETE FROM entradas WHERE id = ?";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, idEntrada);
-            statement.executeUpdate();
-        } catch (SQLException e) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        }catch(Exception e){
             e.printStackTrace();
         }
+        return false;
     }
 
     public void modificarEntrada(Entrada entrada) {
-        String sql = "UPDATE entradas SET precio = ?, tipo = ?, fecha = ?, hora = ?, tipoEntrada = ?, nombrePelicula = ?, sala = ? WHERE idEntrada = ?";
+        String sql = "UPDATE entradas SET precio = ?, tipo = ?, fecha = ?, hora = ?, tipoEntrada = ?, nombrePelicula = ?, sala = ? WHERE id = ?";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, entrada.getPrecio());
@@ -45,7 +49,7 @@ public class EntradaDAO {
             statement.setString(5, entrada.getTipoEntrada());
             statement.setString(6, entrada.getNombrePelicula());
             statement.setString(7, entrada.getSala());
-            statement.setInt(8, entrada.getIdEntrada());
+            statement.setInt(8, entrada.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,12 +79,12 @@ public class EntradaDAO {
         }
         return entradas;
     }
-    public Entrada buscarEntradaPorID(int idEntrada) {
+    public Entrada buscarEntradaPorID(int id) {
         Entrada entrada = null;
-        String sql = "SELECT * FROM entradas WHERE idEntrada = ?";
+        String sql = "SELECT * FROM entradas WHERE id = ?";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, idEntrada);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 entrada = new Entrada(

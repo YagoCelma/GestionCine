@@ -2,7 +2,7 @@ package model;
 
 public class Entrada {
         
-    private int idEntrada;
+    private int id;
     private int precio;
     private String tipo;
     private String fecha;
@@ -21,11 +21,11 @@ public class Entrada {
         this.nombrePelicula = nombrePelicula;
         this.sala = sala;
     }
-    public int getIdEntrada() {
-        return idEntrada;
+    public int getId() {
+        return id;
     }
-    public void setIdEntrada(int idEntrada) {
-        this.idEntrada = idEntrada;
+    public void setId(int id) {
+        this.id = id;
     }   
     public int getPrecio() {
         return precio;
