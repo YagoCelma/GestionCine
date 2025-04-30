@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.Salas_peliculas;
 
 public class Salas_peliculasDao {
-
+    /* 
     public void agregarSalaPelicula(Salas_peliculas salas_peliculas){
         try(Connection conn = ConexionDB.getConnection()) {
             String sql = "INSERT INTO salas_peliculas (nombre_pelicula, fecha_incio_emision, fecha_fin_emision, hora_inicio, hora_fin)  ";
@@ -55,5 +55,5 @@ public class Salas_peliculasDao {
     public void actualizarSalaPelicula(Salas_peliculas salas_peliculas){
 
     }
-    
+    */
 }

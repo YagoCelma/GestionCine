@@ -20,7 +20,6 @@ public class Emision {
         this.idPelicula = idPelicula;
     }
 
-    // Getters y setters
     public int getId() { return id; }
     public String getNombre() { return nombre; }
     public int getDuracion() { return duracion; }
