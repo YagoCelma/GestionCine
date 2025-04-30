@@ -2,31 +2,37 @@ package model;
 
 public class Entrada {
         
-    private int idEntrada;
+    private int id;
+    private int asiento;
     private int precio;
     private String tipo;
     private String fecha;
     private String hora;
-    private String tipoEntrada;
     private String nombrePelicula;
     private String sala;
     
-    public Entrada(int precio, String tipo, String fecha, String hora, String tipoEntrada, String nombrePelicula, String sala) {
+    public Entrada(int precio, int asiento, String tipo, String fecha, String hora, String nombrePelicula, String sala) {
         
         this.precio = precio;
+        this.asiento = asiento;
         this.tipo = tipo;
         this.fecha = fecha;
         this.hora = hora;
-        this.tipoEntrada = tipoEntrada;
         this.nombrePelicula = nombrePelicula;
         this.sala = sala;
     }
-    public int getIdEntrada() {
-        return idEntrada;
+    public int getId() {
+        return id;
     }
-    public void setIdEntrada(int idEntrada) {
-        this.idEntrada = idEntrada;
+    public void setId(int id) {
+        this.id = id;
     }   
+    public int getAsiento() {
+        return asiento;
+    }
+    public void setAsiento(int asiento) {
+        this.asiento = asiento;
+    }
     public int getPrecio() {
         return precio;
     }
@@ -50,12 +56,6 @@ public class Entrada {
     }
     public void setHora(String hora) {
         this.hora = hora;
-    }
-    public String getTipoEntrada() {
-        return tipoEntrada;
-    }
-    public void setTipoEntrada(String tipoEntrada) {
-        this.tipoEntrada = tipoEntrada;
     }
     public String getNombrePelicula() {
         return nombrePelicula;
