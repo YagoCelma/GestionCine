@@ -7,14 +7,13 @@ import model.Entrada;
 public class EntradaDAO {
 
     public void añadirEntrada(Entrada entrada) {
-        String sql = "INSERT INTO entradas (precio, tipo, fecha, hora, tipoEntrada, nombrePelicula, sala) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO entradas (precio, tipo, fecha, hora, nombrePelicula, sala) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, entrada.getPrecio());
             statement.setString(2, entrada.getTipo());
             statement.setString(3, entrada.getFecha());
             statement.setString(4, entrada.getHora());
-            statement.setString(5, entrada.getTipoEntrada());
             statement.setString(6, entrada.getNombrePelicula());
             statement.setString(7, entrada.getSala());
             statement.executeUpdate();
@@ -46,7 +45,6 @@ public class EntradaDAO {
             statement.setString(2, entrada.getTipo());
             statement.setString(3, entrada.getFecha());
             statement.setString(4, entrada.getHora());
-            statement.setString(5, entrada.getTipoEntrada());
             statement.setString(6, entrada.getNombrePelicula());
             statement.setString(7, entrada.getSala());
             statement.setInt(8, entrada.getId());
@@ -68,7 +66,6 @@ public class EntradaDAO {
                         resultSet.getString("tipo"),
                         resultSet.getString("fecha"),
                         resultSet.getString("hora"),
-                        resultSet.getString("tipoEntrada"),
                         resultSet.getString("nombrePelicula"),
                         resultSet.getString("sala")
                 );
@@ -93,7 +90,6 @@ public class EntradaDAO {
                         resultSet.getString("tipo"),
                         resultSet.getString("fecha"),
                         resultSet.getString("hora"),
-                        resultSet.getString("tipoEntrada"),
                         resultSet.getString("nombrePelicula"),
                         resultSet.getString("sala")
                 );

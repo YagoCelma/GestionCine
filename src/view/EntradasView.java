@@ -48,7 +48,7 @@ public class EntradasView {
         System.out.println("Introduzca la sala");
         String sala = sc.nextLine();
 
-        Entrada entrada = new Entrada(precio, tipo, fecha, hora, tipoEntrada, nombrePelicula, sala);
+        Entrada entrada = new Entrada(precio, tipo, fecha, hora, nombrePelicula, sala);
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.añadirEntrada(entrada);
         System.out.println("Entrada añadida correctamente con ID: " + entrada.getId());
@@ -57,10 +57,10 @@ public class EntradasView {
     }
     public void borrarEntrada(){
         System.out.println("Introduzca el ID de la entrada a borrar");
-        int idEntrada = sc.nextInt();
+        int id = sc.nextInt();
         sc.nextLine();
         EntradaDAO entradaDAO = new EntradaDAO();
-        if(entradaDAO.borrarEntrada(idEntrada)){
+        if(entradaDAO.borrarEntrada(id)){
             System.out.println("Entrada borrada correctamente");
         }else{
             System.out.println("No se ha podido borrar la entrada, verifique el ID");
@@ -70,10 +70,10 @@ public class EntradasView {
     }
     public void modificarEntrada(){
         System.out.println("Introduzca el ID de la entrada a modificar");
-        int idEntrada = sc.nextInt();
+        int id = sc.nextInt();
         sc.nextLine();
         EntradaDAO entradaDAO = new EntradaDAO();
-        Entrada entrada = entradaDAO.buscarEntradaPorID(idEntrada);
+        Entrada entrada = entradaDAO.buscarEntradaPorID(id);
         if(entrada != null){
             menuModificarEntrada(entrada);
         }else{  
@@ -90,10 +90,9 @@ public class EntradasView {
             System.out.println("2. Modificar tipo");
             System.out.println("3. Modificar fecha");
             System.out.println("4. Modificar hora");
-            System.out.println("5. Modificar tipo de entrada (normal, niño o jubilados)");
-            System.out.println("6. Modificar nombre de la pelicula");
-            System.out.println("7. Modificar sala");
-            System.out.println("8. Salir");
+            System.out.println("5. Modificar nombre de la pelicula");
+            System.out.println("6. Modificar sala");
+            System.out.println("7. Salir");
             System.out.println("Elige una opcion");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -103,12 +102,10 @@ public class EntradasView {
                 case 2-> entrada.setTipo(sc.nextLine());
                 case 3-> entrada.setFecha(sc.nextLine());
                 case 4-> entrada.setHora(sc.nextLine());
-                case 5-> entrada.setTipoEntrada(sc.nextLine());
                 case 6-> entrada.setNombrePelicula(sc.nextLine());
-                case 7-> entrada.setSala(sc.nextLine());
                 default -> System.out.println("Seleccione una opcion que sea valida");
             }
-        }while(opcion != 8);
+        }while(opcion != 7);
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.modificarEntrada(entrada);
         System.out.println("Entrada modificada correctamente con ID: " + entrada.getId());
@@ -127,10 +124,10 @@ public class EntradasView {
 
     public void buscarEntradaID(){
         System.out.println("Introduzca el ID de la entrada a buscar");
-        int idEntrada = sc.nextInt();
+        int id = sc.nextInt();
         sc.nextLine();
         EntradaDAO entradaDAO = new EntradaDAO();
-        Entrada entrada = entradaDAO.buscarEntradaPorID(idEntrada);
+        Entrada entrada = entradaDAO.buscarEntradaPorID(id);
         if(entrada != null){
             System.out.println("Entrada encontrada: " + entrada);
         }else{  

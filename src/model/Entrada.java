@@ -7,17 +7,16 @@ public class Entrada {
     private String tipo;
     private String fecha;
     private String hora;
-    private String tipoEntrada;
+
     private String nombrePelicula;
     private String sala;
     
-    public Entrada(int precio, String tipo, String fecha, String hora, String tipoEntrada, String nombrePelicula, String sala) {
+    public Entrada(int precio, String tipo, String fecha, String hora, String nombrePelicula, String sala) {
         
         this.precio = precio;
         this.tipo = tipo;
         this.fecha = fecha;
         this.hora = hora;
-        this.tipoEntrada = tipoEntrada;
         this.nombrePelicula = nombrePelicula;
         this.sala = sala;
     }
@@ -50,12 +49,6 @@ public class Entrada {
     }
     public void setHora(String hora) {
         this.hora = hora;
-    }
-    public String getTipoEntrada() {
-        return tipoEntrada;
-    }
-    public void setTipoEntrada(String tipoEntrada) {
-        this.tipoEntrada = tipoEntrada;
     }
     public String getNombrePelicula() {
         return nombrePelicula;
