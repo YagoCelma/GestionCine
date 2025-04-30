@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS empleados(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     telefono INT(15) NOT NULL,
     email VARCHAR(100) NOT NULL, --samu 
     puesto VARCHAR(50) NOT NULL,
@@ -12,6 +14,8 @@ CREATE TABLE IF NOT EXISTS empleados(
 CREATE TABLE IF NOT EXISTS clientes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
     apellido VARCHAR(100) NOT NULL, --yago
     telefono INT(15) NOT NULL,
     email VARCHAR(100) NOT NULL
@@ -29,7 +33,7 @@ CREATE TABLE IF NOT EXISTS flujo_caja (
 CREATE TABLE IF NOT EXISTS proveedor(
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    tipo VARCHAR(30) NOT NULL, --peliculas o productos
+    tipo VARCHAR(30) NOT NULL,
     telefono INT NOT NULL,
     email VARCHAR(100) NOT NULL
 );
@@ -55,12 +59,12 @@ CREATE TABLE IF NOT EXISTS inventario_productos (
 CREATE TABLE IF NOT EXISTS peliculas (
     id_pelicula INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
+    director VARCHAR(100) NOT NULL,
     genero VARCHAR(100) NOT NULL,
-    coste DECIMAL(3,2) NOT NULL, --jorge
-    id_entrada INT NOT NULL,
-    id_sala INT NOT NULL,
-    FOREIGN KEY (id_sala) REFERENCES sala(id_sala),
-    FOREIGN KEY (id_entrada) REFERENCES entradas(id_entrada)
+    duracion INT NOT NULL,
+    clasificacion VARCHAR(100) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    en_cartelera BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS entradas (
@@ -76,7 +80,7 @@ CREATE TABLE IF NOT EXISTS entradas (
 );
 
 CREATE TABLE IF NOT EXISTS sala (
-    id_sala INT AUTO_INCREMENT PRIMARY KEY, --isma
+    id_sala INT AUTO_INCREMENT PRIMARY KEY, 
     capacidad INT NOT NULL
 );
 
