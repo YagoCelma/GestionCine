@@ -7,16 +7,24 @@ import model.Entrada;
 public class EntradaDAO {
 
     public void añadirEntrada(Entrada entrada) {
-        String sql = "INSERT INTO entradas (precio, tipo, fecha, hora, nombrePelicula, sala) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO entradas (precio, asiento, tipo, fecha, hora, nombrePelicula, sala) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, entrada.getPrecio());
-            statement.setString(2, entrada.getTipo());
-            statement.setString(3, entrada.getFecha());
-            statement.setString(4, entrada.getHora());
+            statement.setInt(2, entrada.getAsiento());
+            statement.setString(3, entrada.getTipo());
+            statement.setString(4, entrada.getFecha());
+            statement.setString(5, entrada.getHora());
             statement.setString(6, entrada.getNombrePelicula());
             statement.setString(7, entrada.getSala());
+            
             statement.executeUpdate();
+
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int idGenerado = generatedKeys.getInt(1);
+                entrada.setId(idGenerado);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,9 +50,10 @@ public class EntradaDAO {
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, entrada.getPrecio());
-            statement.setString(2, entrada.getTipo());
-            statement.setString(3, entrada.getFecha());
-            statement.setString(4, entrada.getHora());
+            statement.setInt(2, entrada.getAsiento());
+            statement.setString(3, entrada.getTipo());
+            statement.setString(4, entrada.getFecha());
+            statement.setString(5, entrada.getHora());
             statement.setString(6, entrada.getNombrePelicula());
             statement.setString(7, entrada.getSala());
             statement.setInt(8, entrada.getId());
@@ -63,6 +72,7 @@ public class EntradaDAO {
             while (resultSet.next()) {
                 Entrada entrada = new Entrada(
                         resultSet.getInt("precio"),
+                        resultSet.getInt("asiento"),
                         resultSet.getString("tipo"),
                         resultSet.getString("fecha"),
                         resultSet.getString("hora"),
@@ -87,6 +97,7 @@ public class EntradaDAO {
             if (resultSet.next()) {
                 entrada = new Entrada(
                         resultSet.getInt("precio"),
+                        resultSet.getInt("asiento"),
                         resultSet.getString("tipo"),
                         resultSet.getString("fecha"),
                         resultSet.getString("hora"),

@@ -3,17 +3,18 @@ package model;
 public class Entrada {
         
     private int id;
+    private int asiento;
     private int precio;
     private String tipo;
     private String fecha;
     private String hora;
-
     private String nombrePelicula;
     private String sala;
     
-    public Entrada(int precio, String tipo, String fecha, String hora, String nombrePelicula, String sala) {
+    public Entrada(int precio, int asiento, String tipo, String fecha, String hora, String nombrePelicula, String sala) {
         
         this.precio = precio;
+        this.asiento = asiento;
         this.tipo = tipo;
         this.fecha = fecha;
         this.hora = hora;
@@ -26,6 +27,12 @@ public class Entrada {
     public void setId(int id) {
         this.id = id;
     }   
+    public int getAsiento() {
+        return asiento;
+    }
+    public void setAsiento(int asiento) {
+        this.asiento = asiento;
+    }
     public int getPrecio() {
         return precio;
     }
