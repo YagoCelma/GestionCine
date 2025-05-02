@@ -53,7 +53,7 @@ public class CineConfigEditor {
                         break;
                     case 7:
                         guardarConfiguracion();
-                        System.out.println("¡Cambios guardados correctamente!");
+                        System.out.println("Cambios guardados correctamente");
                         return;
                     default:
                         System.out.println("Opción no válida");
