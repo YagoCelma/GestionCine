@@ -1,0 +1,111 @@
+{
+    "cine":{
+        "nombre": "CineMax",
+        "direccion": "Calle Santa Monica 89, Sevilla",
+        "telefono": "+34 912 345 678",
+        "horarioApertura":"10:00",
+        "horarioCierre":"12:00",
+        "diasAperturaSemanal": ["Lunes", "Jueves", "Viernes", "Sabado", "Domingo"],
+        "diasCierreSemanal": ["Martes", "Miercoles"],
+        "diaEspectador": "Miercoles",
+        "PrecioDiaEspectador": 3,
+        "diasCierreFestivo": ["2025-12-25", "2025-12-31", "2026-01-01" ],
+        "moneda": "EUR",
+        "IVA": 21,
+        "promociones": [
+            {
+            "nombre": "2x1 en Jueves",
+            "descripcion": "Compra una entrada y lleva otra gratis los martes",
+            "dias_validos": ["Martes"],
+            "descuento": 50,
+            "productos_aplicables": ["entrada_normal"]
+            },
+            {
+            "nombre": "Combo Familiar",
+            "descripcion": "4 entradas + 2 palomitas grandes + 2 refrescos",
+            "precio_promocion": 30.00,
+            "valido_hasta": "2025-12-31"
+            }
+        ],
+        "textosPublicitarios":{
+            "bienvenida": "¡Bienvenidos a CineMax!",
+            "mensaje_pantalla": "Próximamente: Spider-Man 6",
+            "redes_sociales": "@CineMax_Oficial"
+        },
+        "politicas": {
+            "devoluciones": "Se aceptan devoluciones hasta 1 hora antes de la función",
+            "edad_minima_no_acompanado": 12,
+            "normas": [
+            "No grabar la película",
+            "Silenciar móviles",
+            "No ingresar comida externa"
+            ]
+        },
+        "horarios_automaticos": {
+        "intervalo_entre_funciones": 30,
+        "horario_primer_funcion": "10:00",
+        "horario_ultima_funcion": "22:30",
+        "duracion_publicidad_previa": 15
+        },
+        "mapa_cine": {
+        "sala_emergencia": "Pasillo izquierdo",
+        "baños":"Pasillo derecho",
+        "ubicacion_bar": "Planta baja",
+        "zona_discapacitados": ["Sala 1", "Sala 3"]
+        },
+        "idiomas": {
+        "disponibles": ["español", "inglés", "francés"],
+        "idioma_predeterminado": "español",
+        "subtitulos_automaticos": false
+        },
+        "limpieza": {
+        "frecuencia_salas": 120,
+        "horario_limpieza_profunda": "15:00",
+        "productos_utilizados": ["desinfectante", "limpiavidrios"]
+        },
+        "temporadas": [
+            {
+            "nombre": "Halloween",
+            "fecha_inicio": "2025-10-25",
+            "fecha_fin": "2025-11-01",
+            "peliculas_especiales": ["Scream 7", "The Conjuring 4", "Halloween Ends"],
+            "decoracion": "calabazas"
+            },
+            {
+            "nombre": "Navidad",
+            "fecha_inicio": "2025-12-20",
+            "fecha_fin": "2026-01-06",
+            "peliculas_especiales": ["Love Actually", "The Holiday", "Elf"],
+            "decoracion": "arbol de navidad"
+            },
+            {
+            "nombre": "Verano",
+            "fecha_inicio": "2026-06-21",
+            "fecha_fin": "2026-09-22",
+            "peliculas_especiales": ["Jaws", "Guardians of the Galaxy Vol. 3", "The Fast and the Furious"],
+            "decoracion": "palmeras"
+            },
+            {
+            "nombre": "San Valentín",
+            "fecha_inicio": "2026-02-10",
+            "fecha_fin": "2026-02-16",
+            "peliculas_especiales": ["Titanic", "The Notebook", "Crazy Rich Asians"],
+            "decoracion": "corazones"
+            },
+            {
+            "nombre": "Semana Santa",
+            "fecha_inicio": "2026-03-29",
+            "fecha_fin": "2026-04-04",
+            "peliculas_especiales": ["The Ten Commandments", "Ben-Hur", "Passion of the Christ"],
+            "decoracion": "flores"
+            }
+        ],
+        "alianzas": [
+                {
+                "empresa": "Pizzería Napoli",
+                "descuento": "10% mostrando ticket de cine",
+                "validez": "2025-12-31"
+                }
+        ]    
+    }
+}
