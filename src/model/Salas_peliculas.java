@@ -12,6 +12,7 @@ public class Salas_peliculas {
     private Time hora_fin;
     private int id_sala;
     private int id_pelicula;
+    private double precioEntrada;
 
     public Salas_peliculas() {}
 
@@ -22,6 +23,7 @@ public class Salas_peliculas {
         this.hora_fin = hora_fin;
         this.id_sala = id_sala;
         this.id_pelicula = id_pelicula;
+        this.precioEntrada = precioEntrada;
     }
 
     public int getId() { return id; }
@@ -31,6 +33,7 @@ public class Salas_peliculas {
     public Time getHora_fin() { return hora_fin; }
     public int getId_sala() { return id_sala; }
     public int getId_pelicula() { return id_pelicula; }
+    public double precioEntrada() {return precioEntrada;}
 
     public void setId(int id) { this.id = id; }
     public void setFecha_inicio_emision(Date fecha_inicio_emision) { this.fecha_inicio_emision = fecha_inicio_emision; }
@@ -39,6 +42,7 @@ public class Salas_peliculas {
     public void setHora_fin(Time hora_fin) { this.hora_fin = hora_fin; }
     public void setId_sala(int id_sala) { this.id_sala = id_sala; }
     public void setId_pelicula(int id_pelicula) { this.id_pelicula = id_pelicula; }
+    public void setPrecioEntrada(double precioEntrada) {this.precioEntrada = precioEntrada;}
 
     @Override
     public String toString() {

@@ -1,7 +1,9 @@
 package view;
+import dao.ClienteDAO;
 import dao.EntradaDAO;
 import java.util.*;
 import model.Entrada;
+import dao.Salas_peliculasDao;
 
 
 public class EntradasView {
@@ -12,7 +14,7 @@ public class EntradasView {
         int opcion;
         do{
             System.out.println("Menu de Entradas");
-            System.out.println("1. Añadir entrada");
+            System.out.println("1. Vender entrada");
             System.out.println("2. Borrar entrada");
             System.out.println("3. Modificar entrada");
             System.out.println("4. Listar entradas");
@@ -23,35 +25,56 @@ public class EntradasView {
             sc.nextLine();
     
             switch(opcion){
-                case 1-> añadirEntrada();
+                case 1-> venderEntrada();
                 case 2-> borrarEntrada();
                 case 3-> modificarEntrada();
                 case 4-> listarEntrada();
                 case 5 -> buscarEntradaID();
+                case 6-> System.out.println("Saliendo...");
                 default -> System.out.println("Seleccione una opcion que sea valida");
             }
         }while(opcion != 6);
     }
-    public void añadirEntrada(){
-        System.out.println("Introduzca el precio");
-        int precio = sc.nextInt();
-        System.out.println("Introduzca el asiento");
-        int asiento = sc.nextInt();
-        System.out.println("Introduzca el tipo de entrada");
-        String tipo = sc.nextLine();
-        System.out.println("Introduzca la fecha");
-        String fecha = sc.nextLine();
-        System.out.println("Introduzca la hora");
-        String hora = sc.nextLine();
-        System.out.println("Introduzca el nombre de la pelicula");
-        String nombrePelicula = sc.nextLine();
-        System.out.println("Introduzca la sala");
-        String sala = sc.nextLine();
+    public void venderEntrada(){
+        System.out.println("---PELICULAS DISPONIBLES---");
+        Salas_peliculasDao.mostrarPeliculasDisponibles(); //En el dao de salaPeliculas listar las disponibles con su id
 
-        Entrada entrada = new Entrada(precio, asiento, tipo, fecha, hora, nombrePelicula, sala);
+        System.out.println("ID de la sala pelicula");
+        int idSalaPelicula = sc.nextInt();
+        sc.nextLine();
+
+        Salas_peliculasDao salaPeliculaDAO = new Salas_peliculasDao();
+        double precioBase = salaPeliculaDAO.obtenerPrecioBase(idSalaPelicula);
+        if(precioBase <= 0) {
+            System.out.println("Error id de la sala no encontrado");
+            return;
+        }
+
+        System.out.println("Numero de asiento");
+        int asiento = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("\nTIPOS DE DESCUENTO:");
+        System.out.println("0. Ninguno (precio completo)");
+        System.out.println("1. Socio (20% desc.)");
+        System.out.println("2. Niño (40% desc.)");
+        System.out.println("3. Jubilado (50% desc.)");
+        System.out.print("Seleccione opción: ");
+        int tipoDescuento = sc.nextInt();
+        sc.nextLine();
+
+        double precioFinal = calcularPrecioDescuento(precioBase, tipoDescuento);
+
+        Entrada entrada = new Entrada(asiento, idSalaPelicula, precioFinal);
+
+        if(tipoDescuento == 1){
+            System.out.println("Introduzca DNI");
+            entrada.setDniSocio(sc.nextLine());
+        }
+      
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.añadirEntrada(entrada);
-        System.out.println("Entrada añadida correctamente con ID: " + entrada.getId());
+        System.out.println("Entrada creada. Precio final:" + precioFinal);
 
         
     }
@@ -87,39 +110,29 @@ public class EntradasView {
        do{
             System.out.println("Menu de Modificacion de Entrada");
             System.out.println("1. Modificar precio");
-            System.out.println("2. Modificar tipo");
-            System.out.println("3. Modificar asiento");
-            System.out.println("4. Modificar fecha");
-            System.out.println("5. Modificar hora");
-            System.out.println("6. Modificar nombre de la pelicula");
-            System.out.println("7. Modificar sala");
-            System.out.println("8. Salir");
+            System.out.println("2. Modificar asiento");
+            System.out.println("3. Salir");
             System.out.println("Elige una opcion");
             opcion = sc.nextInt();
             sc.nextLine();
     
             switch(opcion){
-                case 1-> entrada.setPrecio(sc.nextInt());
-                case 2-> entrada.setTipo(sc.nextLine());
-                case 3-> entrada.setAsiento(sc.nextInt());
-                case 4-> entrada.setFecha(sc.nextLine());
-                case 5-> entrada.setHora(sc.nextLine());
-                case 6-> entrada.setNombrePelicula(sc.nextLine());
+                case 1-> entrada.setPrecio(sc.nextDouble());
+                case 2-> entrada.setAsiento(sc.nextInt());
+                case 3-> System.out.println("Saliendo...");
                 default -> System.out.println("Seleccione una opcion que sea valida");
             }
-        }while(opcion != 8);
+        }while(opcion != 3);
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.modificarEntrada(entrada);
         System.out.println("Entrada modificada correctamente con ID: " + entrada.getId());
     }
-
-        
     
     public void listarEntrada(){
         System.out.println("Lista de Entradas:");
         EntradaDAO entradaDAO = new EntradaDAO();
         for (Entrada entrada : entradaDAO.listarEntradas()) {
-            System.out.println(entrada);       
+            System.out.println(entrada);
         }
         
     }
@@ -136,6 +149,15 @@ public class EntradasView {
             System.out.println("No se ha podido encontrar la entrada, verifique el ID");
         }
         
+    }
+
+    private double calcularPrecioDescuento(double precioBase, int tipoDescuento) {
+        return switch(tipoDescuento) {
+            case 1 -> precioBase * 0.8;
+            case 2 -> precioBase * 0.6;
+            case 3 -> precioBase * 0.5;
+            default -> precioBase;
+        };
     }
 }
    

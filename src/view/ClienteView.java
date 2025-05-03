@@ -37,13 +37,15 @@ public class ClienteView {
         String nombre = sc.nextLine();
         System.out.println("Introduzca el apellidos");
         String apellidos = sc.nextLine();
+        System.out.println("Introduzca el DNI");
+        String dni = sc.nextLine();
         System.out.println("Introduzca el telefono");
         int telefono = sc.nextInt();
         sc.nextLine();
         System.out.println("Introduzca el email");
         String email = sc.nextLine();
 
-        Cliente cliente = new Cliente(nombre, apellidos, telefono, email);
+        Cliente cliente = new Cliente(nombre, apellidos,dni, telefono, email);
         ClienteDAO clienteDAO = new ClienteDAO();
         clienteDAO.añadirCliente(cliente);
         System.out.println("Cliente añadido correctamente con ID: " + cliente.getId());
@@ -122,12 +124,14 @@ public class ClienteView {
         System.out.println("Introduce el nuevo nombre");
         String nombre = sc.nextLine();
         cliente.setNombre(nombre);
+        System.out.println("Actualizado con exito");
     }
 
     public void actualizarApellido(Cliente cliente){
         System.out.println("Introduce el nuevo apellido");
         String apellido = sc.nextLine();
         cliente.setApellido(apellido);
+        System.out.println("Actualizado con exito");
     }
 
     public void actualizarTelefono(Cliente cliente){
@@ -135,11 +139,13 @@ public class ClienteView {
         int telefono = sc.nextInt();
         sc.nextLine();
         cliente.setTelefono(telefono);
+        System.out.println("Actualizado con exito");
     }
 
     public void actualizarEmail(Cliente cliente){
         System.out.println("Introduce el nuevo email");
         String email = sc.nextLine();
         cliente.setEmail(email);
+        System.out.println("Actualizado con exito");
     }
 }

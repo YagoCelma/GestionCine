@@ -55,5 +55,22 @@ public class Salas_peliculasDao {
     public void actualizarSalaPelicula(Salas_peliculas salas_peliculas){
 
     }
+
+    public double obtenerPrecioBase(int idSalaPelicula) {
+    String sql = "SELECT precio_base FROM salas_peliculas WHERE id = ?";
+    try(Connection conn = ConexionDB.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setInt(1, idSalaPelicula);
+        ResultSet rs = stmt.executeQuery();
+        
+        if(rs.next()) {
+            return rs.getDouble("precio_base");
+        }
+    }catch (SQLException e){
+        e.printStackTrace();
+    }
+        return 0.0; 
+    }
     */
 }

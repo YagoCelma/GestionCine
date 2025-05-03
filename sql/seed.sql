@@ -69,14 +69,10 @@ CREATE TABLE IF NOT EXISTS peliculas (
 
 CREATE TABLE IF NOT EXISTS entradas (
     id_entrada INT AUTO_INCREMENT PRIMARY KEY,
-    id_pelicula INT NOT NULL,
-    tipo ENUM('descuento_nino', 'descuento_jubilado', 'normal'),
+    id_sala_pelicula INT NOT NULL,
     precio DECIMAL(3, 2) NOT NULL,
-    hora TIME NOT NULL, --andres
-    fecha DATE NOT NULL,
-    id_sala INT NOT NULL,
-    FOREIGN KEY (id_sala) REFERENCES sala(id_sala),
-    FOREIGN KEY (id_pelicula) REFERENCES peliculas(id_pelicula)
+    asiento INT NOT NULL,
+    FOREIGN KEY (id_sala_pelicula) REFERENCES salas_peliculas(id)
 );
 
 CREATE TABLE IF NOT EXISTS sala (
@@ -101,9 +97,10 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
 	fecha_incio_emision DATE NOT NULL,  
 	fecha_fin_emision DATE NOT NULL,  
     hora_inicio TIME NOT NULL,  
-    hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de emepezar una pelicula 
+    hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de emepezar una pelicula
+    precio_base DEC(2,2),
     id_sala INT NOT NULL, 
-    id_pelicula INT NOT NULL ,  
+    id_pelicula INT NOT NULL ,
     FOREIGN KEY (id_sala) REFERENCES sala(id_sala), 
     FOREIGN KEY (id_pelicula) REFERENCES pelicula(id_pelicula),	  
 ); 

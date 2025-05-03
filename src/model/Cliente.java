@@ -5,13 +5,15 @@ public class Cliente {
     private int id;
     private String nombre;
     private String apellidos;
+    private String dni;
     private int telefono;
     private String email;
 
-    public Cliente(String nombre, String apellidos, int telefono, String email){
+    public Cliente(String nombre, String apellidos,String dni, int telefono, String email){
 
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.dni = dni;
         this.telefono = telefono;
         this.email = email;
     }
@@ -27,6 +29,10 @@ public class Cliente {
     public String getNombre() {return nombre;}
 
     public void setNombre(String nombre) {this.nombre = nombre;}
+
+    public String getDNI() {return dni;}
+
+    public void setDNI(String dni) {this.dni = dni;}
 
     public String getApellido() {return apellidos;}
 
