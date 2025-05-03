@@ -7,16 +7,11 @@ import model.Entrada;
 public class EntradaDAO {
 
     public void añadirEntrada(Entrada entrada) {
-        String sql = "INSERT INTO entradas (precio, asiento, tipo, fecha, hora, nombrePelicula, sala) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO entradas (id_sala_pelicula, precio, asiento) VALUES (?, ?, ?)";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, entrada.getPrecio());
+            statement.setDouble(1, entrada.getPrecio());
             statement.setInt(2, entrada.getAsiento());
-            statement.setString(3, entrada.getTipo());
-            statement.setString(4, entrada.getFecha());
-            statement.setString(5, entrada.getHora());
-            statement.setString(6, entrada.getNombrePelicula());
-            statement.setString(7, entrada.getSala());
             
             statement.executeUpdate();
 
@@ -35,6 +30,7 @@ public class EntradaDAO {
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
+            
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -46,17 +42,12 @@ public class EntradaDAO {
     }
 
     public void modificarEntrada(Entrada entrada) {
-        String sql = "UPDATE entradas SET precio = ?, tipo = ?, fecha = ?, hora = ?, tipoEntrada = ?, nombrePelicula = ?, sala = ? WHERE id = ?";
+        String sql = "UPDATE entradas SET precio = ?, asiento = ? WHERE id = ?";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, entrada.getPrecio());
+            statement.setDouble(1, entrada.getPrecio());
             statement.setInt(2, entrada.getAsiento());
-            statement.setString(3, entrada.getTipo());
-            statement.setString(4, entrada.getFecha());
-            statement.setString(5, entrada.getHora());
-            statement.setString(6, entrada.getNombrePelicula());
-            statement.setString(7, entrada.getSala());
-            statement.setInt(8, entrada.getId());
+            statement.setInt(3, entrada.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,13 +62,9 @@ public class EntradaDAO {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Entrada entrada = new Entrada(
-                        resultSet.getInt("precio"),
-                        resultSet.getInt("asiento"),
-                        resultSet.getString("tipo"),
-                        resultSet.getString("fecha"),
-                        resultSet.getString("hora"),
-                        resultSet.getString("nombrePelicula"),
-                        resultSet.getString("sala")
+                    resultSet.getInt("idSalaPeliculas"),
+                    resultSet.getInt("precio"),
+                    resultSet.getInt("asiento")
                 );
                 entradas.add(entrada);
             }
@@ -96,13 +83,9 @@ public class EntradaDAO {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 entrada = new Entrada(
-                        resultSet.getInt("precio"),
-                        resultSet.getInt("asiento"),
-                        resultSet.getString("tipo"),
-                        resultSet.getString("fecha"),
-                        resultSet.getString("hora"),
-                        resultSet.getString("nombrePelicula"),
-                        resultSet.getString("sala")
+                    resultSet.getInt("idSalaPeliculas"),
+                    resultSet.getInt("precio"),
+                    resultSet.getInt("asiento")
                 );
             }
         } catch (SQLException e) {

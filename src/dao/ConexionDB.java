@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionDB {
-    private static final String URL = "jdbc:mysql://preda.es:4141/gestion_cine";
+    private static final String URL = "jdbc:mysql://preda.es:4141/cine";
     private static final String USER = "cine";
     private static final String PASSWORD = "GestorCine9872";
 

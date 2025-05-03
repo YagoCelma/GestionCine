@@ -1,16 +1,14 @@
 package dao;
 
 import java.sql.*;
-import view.SalaView;
-import model.Cliente;
-import model.Sala;
 import java.util.ArrayList;
+import model.Sala;
 
 public class SalaDAO {
     
     public void crearSala(Sala sala){
 
-        try(Connection conn = ConexionDB.getConection()){
+        try(Connection conn = ConexionDB.getConnection()){
             String sql = "INSERT INTO sala(capacidad) VALUES (?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, sala.getCapacidad());
