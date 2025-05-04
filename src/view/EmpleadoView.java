@@ -16,7 +16,7 @@ public class EmpleadoView {
     public void gestionEmpleados(){
         int respuesta;
         do{
-            System.out.println("\n Sistema de gestión de empleados");
+            System.out.println("\n Menu de empleados");
             System.out.println("1. Agregar empleado");
             System.out.println("2. Eliminar empleado");
             System.out.println("3. Mostrar empleados");
