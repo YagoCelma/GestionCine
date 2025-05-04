@@ -132,3 +132,73 @@ CREATE TABLE IF NOT EXISTS inventario_pelicula (
     copias_disponibles INT,
     FOREIGN KEY (pelicula_id) REFERENCES peliculas(id)
 );
+
+-- Validación de fechas en salas_peliculas
+DELIMITER //
+CREATE TRIGGER validar_fechas_salas_peliculas
+BEFORE INSERT ON salas_peliculas
+FOR EACH ROW
+BEGIN
+    IF NEW.fecha_fin_emision < NEW.fecha_incio_emision THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La fecha de fin debe ser posterior a la fecha de inicio';
+    END IF;
+    
+    IF NEW.hora_fin <= NEW.hora_inicio THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La hora de fin debe ser posterior a la hora de inicio';
+    END IF;
+END//
+DELIMITER ;
+
+-- Actualización de flujo de caja
+DELIMITER //
+CREATE TRIGGER actualizar_flujo_caja_pedido
+AFTER INSERT ON pedidos
+FOR EACH ROW
+BEGIN
+    IF NEW.estado = 'PAGADO' THEN
+        INSERT INTO flujo_caja (tipo, descripcion, cantidad, fecha, categoria)
+        VALUES ('INGRESO', CONCAT('Pedido #', NEW.id_pedido), NEW.precio_total, CURDATE(), 'VENTA');
+    END IF;
+END//
+DELIMITER ;
+
+
+-- Actualización de cartelera
+DELIMITER //
+CREATE TRIGGER actualizar_cartelera
+AFTER INSERT ON salas_peliculas
+FOR EACH ROW
+BEGIN
+    INSERT IGNORE INTO cartelera (titulo)
+    VALUES (NEW.nombre_pelicula);
+END//
+DELIMITER ;
+
+-- Validación de horarios 
+DELIMITER //
+CREATE TRIGGER validar_horarios_peliculas
+BEFORE INSERT ON salas_peliculas
+FOR EACH ROW
+BEGIN
+    DECLARE hay_solapamiento INT;
+    
+    SELECT COUNT(*) INTO hay_solapamiento
+    FROM salas_peliculas
+    WHERE id_sala = NEW.id_sala
+    AND (
+        (NEW.fecha_incio_emision BETWEEN fecha_incio_emision AND fecha_fin_emision
+        OR NEW.fecha_fin_emision BETWEEN fecha_incio_emision AND fecha_fin_emision)
+        AND (
+            (NEW.hora_inicio BETWEEN hora_inicio AND hora_fin)
+            OR (NEW.hora_fin BETWEEN hora_inicio AND hora_fin)
+        )
+    );
+    
+    IF hay_solapamiento > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Existe un solapamiento en la sala';
+    END IF;
+END//
+DELIMITER ;
