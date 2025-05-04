@@ -7,6 +7,7 @@ import dao.Salas_peliculasDao;
 
 
 public class EntradasView {
+    
     Scanner sc = new Scanner(System.in);
     
     
@@ -35,6 +36,7 @@ public class EntradasView {
             }
         }while(opcion != 6);
     }
+    
     public void venderEntrada(){
         System.out.println("---PELICULAS DISPONIBLES---");
         Salas_peliculasDao.mostrarPeliculasDisponibles(); //En el dao de salaPeliculas listar las disponibles con su id
@@ -49,6 +51,7 @@ public class EntradasView {
             System.out.println("Error id de la sala no encontrado");
             return;
         }
+            
 
         System.out.println("Numero de asiento");
         int asiento = sc.nextInt();
@@ -159,5 +162,5 @@ public class EntradasView {
             default -> precioBase;
         };
     }
+
 }
-   

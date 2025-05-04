@@ -4,6 +4,8 @@ public class Cartelera {
 
     String titulo;
 
+    public Cartelera(){}
+
     public Cartelera(String titulo){
         this.titulo = titulo;
     }
@@ -16,7 +18,6 @@ public class Cartelera {
         return "Cartelera{"+
         "Titulo: " +  titulo +
         "}";
-
     }
     
 }
