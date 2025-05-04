@@ -105,6 +105,10 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     FOREIGN KEY (id_pelicula) REFERENCES pelicula(id_pelicula),	  
 ); 
 
+CREATE TABLE IF NOT EXISTS cartelera(
+    titulo VARCHAR(50) PRIMARY KEY
+)
+
 CREATE TABLE IF NOT EXISTS emision(
     id
     nombre

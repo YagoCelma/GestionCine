@@ -183,6 +183,34 @@ public class PeliculaDAO {
         }
     }
 
+    public Pelicula mostrarPeliculaByTitulo(String titulo) throws SQLException { //Lo he creado para la cartelera
+        Connection conexion = dao.ConexionDB.getConnection();
+        String query = "SELECT * FROM peliculas WHERE titulo = ?";
+        
+        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+            stmt.setString(1, titulo);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Pelicula pelicula = new Pelicula();
+                    pelicula.setId(rs.getInt("id"));
+                    pelicula.setTitulo(rs.getString("titulo"));
+                    pelicula.setDirector(rs.getString("director"));
+                    pelicula.setGenero(rs.getString("genero"));
+                    pelicula.setDuracion(rs.getInt("duracion"));
+                    pelicula.setClasificacion(rs.getString("clasificacion"));
+                    pelicula.setPrecioEntrada(rs.getDouble("precio"));
+                    pelicula.setFechaInicio(rs.getDate("fecha_inicio"));
+                    pelicula.setFechaFin(rs.getDate("fecha_fin"));
+                    return pelicula;
+                }
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al realizar la consulta: " + e.getMessage());
+            return null;
+        }
+    }
+
     public void borrarPelicula(int id) throws SQLException {
 
         Connection conexion = dao.ConexionDB.getConnection();
