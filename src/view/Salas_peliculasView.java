@@ -1,22 +1,71 @@
 package view;
-/* 
-import java.sql.Date;
+
+import dao.CarteleraDAO;
+import dao.Salas_peliculasDao;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 import model.Salas_peliculas;
-import model.Salas;
-import model.Emision;
-import dao.Salas_peliculasDao;
-import dao.EmisionDAO;
-import dao.SalasDao;
-import dao.PeliculaDAO;
 
 public class Salas_peliculasView {
+
+    private final Scanner sc = new Scanner(System.in);
+    private final Salas_peliculasDao salas_peliculasDao = new Salas_peliculasDao();
     
+
+    public void gestionSalas_Peliculas(){
+        int opcion = 0;
+        do { 
+            System.out.println(" \n Gestion de Salas y peliculas");
+            System.out.println("1. Crear sala y pelicula");
+            System.out.println("2. Eliminar salas y peliculas ");
+            System.out.println("3. Mostrar salas y peliculas disponibles");
+            System.out.println("4. Buscar una sala y pelicula por ID");
+            System.out.println("5. Actualizar salas y peliculas");
+            System.out.println("6. Volver al menu principal");
+            opcion = sc.nextInt();
+
+            switch(opcion){
+                case 1 -> this.crearSalaPelicula();
+                
+                case 6 -> System.out.println("Saliendo del menu de salas y peliculas...");
+                default -> System.out.println("Opcion no valida, intentelo de nuevo ");
+            }
+
+        } while (opcion != 6);
+    }
+
+    public void crearSalaPelicula(){
+
+        System.out.println("Nombre de la pelicula: ");
+        String nombre = sc.nextLine();
+        CarteleraDAO carteleraDAO = new CarteleraDAO();
+        if(carteleraDAO.esta(nombre)){
+
+        }
+        System.out.println("Hora inicio (HH:mm): ");
+        String horaInicioStr = sc.nextLine();
+        LocalTime horaInicio = LocalTime.parse(horaInicioStr);
+        Time timeInicio = Time.valueOf(horaInicio);
+        System.out.println("Hora fin (HH:mm): ");
+        String horaFinStr = sc.nextLine();
+        LocalTime horaFin = LocalTime.parse(horaFinStr);
+        Time timeFin = Time.valueOf(horaFin);
+        System.out.println("Id_sala donde se va a emitir ");
+        int sala = sc.nextInt();
+        System.out.println("Precio base de la entrada: ");
+        double precioBase = sc.nextDouble();
+
+        Salas_peliculas salas_peliculas = new Salas_peliculas(nombre, timeInicio, timeFin, sala, precioBase);
+        salas_peliculasDao.agregarSalaPelicula();
+        System.out.println("Salas_pelculas creado correctamente");
+
+
+    }
+
+
+    
+    /* 
     private final Scanner sc = new Scanner(System.in);
     private final Salas_peliculasDao dao = new Salas_peliculasDao();
     private final EmisionDAO emisionDao = new EmisionDAO();
@@ -187,6 +236,7 @@ public class Salas_peliculasView {
         } else {
             System.out.println("No se encontró ninguna sala_pelicula con ese ID.");
         }
+            }*/
     }
 
-}*/
+

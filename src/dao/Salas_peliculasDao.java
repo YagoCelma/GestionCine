@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import model.Salas_peliculas;
 
 public class Salas_peliculasDao {
+
+    public void agregarSalaPelicula(){
+        
+    }
     /* 
     public void agregarSalaPelicula(Salas_peliculas salas_peliculas){
         try(Connection conn = ConexionDB.getConnection()) {
@@ -59,7 +63,7 @@ public class Salas_peliculasDao {
     public double obtenerPrecioBase(int idSalaPelicula) {
     String sql = "SELECT precio_base FROM salas_peliculas WHERE id = ?";
     try(Connection conn = ConexionDB.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
         
         stmt.setInt(1, idSalaPelicula);
         ResultSet rs = stmt.executeQuery();
