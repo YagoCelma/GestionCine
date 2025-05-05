@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     nombre_pelicula VARCHAR(50) NOT NULL, 
     hora_inicio TIME NOT NULL,  
     hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de empezar una pelicula
-    precio_base DEC(2,2),
     id_sala INT NOT NULL, 
+    precio_base DEC(2,2),
     id_pelicula INT NOT NULL, 
     FOREIGN KEY (id_sala) REFERENCES sala(id_sala),  
     FOREIGN KEY (id_pelicula) REFERENCES peliculas(id_pelicula)

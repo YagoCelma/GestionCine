@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class Emision {
+public class Emision { //lO CREE PARA AUTOMATIZAR SALAS_PELICULAS PERO NO SE LLEGO A USAR
     private int id;
     private String nombre;
     private int duracion;

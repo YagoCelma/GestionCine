@@ -1,23 +1,26 @@
 package view;
 
-import dao.CarteleraDAO;
+import dao.PeliculaDAO;
 import dao.Salas_peliculasDao;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
+import model.Pelicula;
 import model.Salas_peliculas;
 
 public class Salas_peliculasView {
 
     private final Scanner sc = new Scanner(System.in);
-    private final Salas_peliculasDao salas_peliculasDao = new Salas_peliculasDao();
+    private final  Salas_peliculasDao salas_peliculasDao = new Salas_peliculasDao();
     
 
     public void gestionSalas_Peliculas(){
         int opcion = 0;
         do { 
             System.out.println(" \n Gestion de Salas y peliculas");
-            System.out.println("1. Crear sala y pelicula");
+            System.out.println("1. Crear salas y peliculas");
             System.out.println("2. Eliminar salas y peliculas ");
             System.out.println("3. Mostrar salas y peliculas disponibles");
             System.out.println("4. Buscar una sala y pelicula por ID");
@@ -27,68 +30,9 @@ public class Salas_peliculasView {
 
             switch(opcion){
                 case 1 -> this.crearSalaPelicula();
-                
-                case 6 -> System.out.println("Saliendo del menu de salas y peliculas...");
-                default -> System.out.println("Opcion no valida, intentelo de nuevo ");
-            }
-
-        } while (opcion != 6);
-    }
-
-    public void crearSalaPelicula(){
-
-        System.out.println("Nombre de la pelicula: ");
-        String nombre = sc.nextLine();
-        CarteleraDAO carteleraDAO = new CarteleraDAO();
-        if(carteleraDAO.esta(nombre)){
-
-        }
-        System.out.println("Hora inicio (HH:mm): ");
-        String horaInicioStr = sc.nextLine();
-        LocalTime horaInicio = LocalTime.parse(horaInicioStr);
-        Time timeInicio = Time.valueOf(horaInicio);
-        System.out.println("Hora fin (HH:mm): ");
-        String horaFinStr = sc.nextLine();
-        LocalTime horaFin = LocalTime.parse(horaFinStr);
-        Time timeFin = Time.valueOf(horaFin);
-        System.out.println("Id_sala donde se va a emitir ");
-        int sala = sc.nextInt();
-        System.out.println("Precio base de la entrada: ");
-        double precioBase = sc.nextDouble();
-
-        Salas_peliculas salas_peliculas = new Salas_peliculas(nombre, timeInicio, timeFin, sala, precioBase);
-        salas_peliculasDao.agregarSalaPelicula();
-        System.out.println("Salas_pelculas creado correctamente");
-
-
-    }
-
-
-    
-    /* 
-    private final Scanner sc = new Scanner(System.in);
-    private final Salas_peliculasDao dao = new Salas_peliculasDao();
-    private final EmisionDAO emisionDao = new EmisionDAO();
-    private final SalasDao salasDao = new SalasDao();
-    private final PeliculaDAO peliculaDAO = new PeliculaDAO();
-
-    public void gestionSalas_Peliculas(){
-        int opcion = 0;
-        do { 
-            System.out.println(" \n Gestion de Salas y peliculas");
-            System.out.println("1. Establecer emisiones para peliculas");
-            System.out.println("2. Eliminar salas y peliculas ");
-            System.out.println("3. Mostrar salas y peliculas disponibles");
-            System.out.println("4. Buscar una sala y pelicula por ID");
-            System.out.println("5. Actualizar salas y peliculas");
-            System.out.println("6. Volver al menu principal");
-            opcion = sc.nextInt();
-
-            switch(opcion){
-                case 1 -> this.emisionPelicula();
                 case 2 -> this.eliminarSalasPeliculas();
-                case 3 -> this.mostrarSalasPeliculas();
-                case 4 -> this.mostrarPorId();
+                case 3 -> this.mostrar();
+                case 4 -> this.buscarSalaPeliPorId();
                 case 5 -> this.actualizar();
                 case 6 -> System.out.println("Saliendo del menu de salas y peliculas...");
                 default -> System.out.println("Opcion no valida, intentelo de nuevo ");
@@ -96,6 +40,145 @@ public class Salas_peliculasView {
 
         } while (opcion != 6);
     }
+
+    public void crearSalaPelicula() {
+        try {
+            System.out.println("Nombre de la película: ");
+            String nombre = sc.nextLine();
+        
+            PeliculaDAO peliculaDAO = new PeliculaDAO();
+            Pelicula peli = peliculaDAO.mostrarPeliculaByTitulo(nombre);
+        
+            if (peli != null) {
+                int idPelicula = peli.getId();
+        
+                System.out.println("Hora inicio (HH:mm): ");
+                String horaInicioStr = sc.nextLine();
+                LocalTime horaInicio = LocalTime.parse(horaInicioStr);
+                Time timeInicio = Time.valueOf(horaInicio);
+
+                System.out.println("Hora fin (HH:mm): ");
+                String horaFinStr = sc.nextLine();
+                LocalTime horaFin = LocalTime.parse(horaFinStr);
+                Time timeFin = Time.valueOf(horaFin);
+        
+                System.out.println("ID de la sala donde se va a emitir: ");
+                int sala = sc.nextInt();
+                sc.nextLine();
+        
+                System.out.println("Precio base de la entrada: ");
+                double precioBase = sc.nextDouble();
+                sc.nextLine();
+        
+                Salas_peliculas salas_peliculas = new Salas_peliculas(nombre, timeInicio, timeFin, sala, precioBase, idPelicula);
+                salas_peliculasDao.agregarSalaPelicula(salas_peliculas);
+        
+                System.out.println("Sala y película registrada correctamente.");
+            } else {
+                System.out.println("No se encontró ninguna película con ese título.");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Error al buscar la pelicula");
+        }
+    }
+
+    public void eliminarSalasPeliculas(){
+        System.out.println("Ingrese el ID de la sala_pelicula que desee eliminar");
+        int id = sc.nextInt();
+        sc.nextLine();
+        if(salas_peliculasDao.eliminar(id)){
+            System.out.println("Sala_pelicula eliminado correctamente");
+        }else{
+            System.out.println("No se encontro ninguna Sala_pelicula con ese ID");
+        }
+    }
+
+    public void mostrar(){
+        ArrayList<Salas_peliculas> salas_pelis = salas_peliculasDao.mostrar();
+        if(salas_pelis.isEmpty()){
+            System.out.println("No hay salas y peliculas registradas en este momento");
+        } else {
+            System.out.println("\nSalas y peliculas disponibles: ");
+            for(Salas_peliculas sp : salas_pelis){
+                System.out.println(sp);
+            }
+        } 
+    }
+
+    public void buscarSalaPeliPorId(){
+        System.out.println("Ingrese el ID de la sala_pelicula a buscar");
+        int id = sc.nextInt();
+        sc.nextLine();
+        Salas_peliculas sp = salas_peliculasDao.buscarSalaPeliPorID(id);
+        if(sp != null){
+            System.out.println(sp);
+        }else{
+            System.out.println("No se encontro ningun ID de sala_pelicula");
+        }
+    }
+
+    public void actualizar() {
+        try {
+            System.out.println("Ingrese el ID de la sala_pelicula a actualizar:");
+            int id = sc.nextInt();
+            sc.nextLine();
+    
+            Salas_peliculas existente = salas_peliculasDao.buscarSalaPeliPorID(id);
+    
+            if (existente != null) {
+                System.out.println("Nombre película: ");
+                String nombre = sc.nextLine();
+    
+                PeliculaDAO peliculaDAO = new PeliculaDAO();
+                Pelicula pelicula = peliculaDAO.mostrarPeliculaByTitulo(nombre);
+    
+                if (pelicula == null) {
+                    System.out.println("No se encontró esa película en la base de datos.");
+                    return;
+                }
+    
+                System.out.println("Hora inicio (HH:mm): ");
+                String horaInicioStr = sc.nextLine();
+                LocalTime horaInicio = LocalTime.parse(horaInicioStr);
+                Time timeInicio = Time.valueOf(horaInicio);
+    
+                System.out.println("Hora fin (HH:mm): ");
+                String horaFinStr = sc.nextLine();
+                LocalTime horaFin = LocalTime.parse(horaFinStr);
+                Time timeFin = Time.valueOf(horaFin);
+    
+                System.out.println("ID sala: ");
+                int sala = sc.nextInt();
+                sc.nextLine();
+    
+                System.out.println("Precio base de la entrada: ");
+                double precioBase = sc.nextDouble();
+                sc.nextLine();
+    
+                Salas_peliculas sp = new Salas_peliculas();
+                sp.setId(id);
+                sp.setNombrePelicula(nombre);
+                sp.setHora_inicio(timeInicio);
+                sp.setHora_fin(timeFin);
+                sp.setId_sala(sala);
+                sp.setPrecioBase(precioBase);
+                sp.setIdPelicula(pelicula.getId());
+                
+                salas_peliculasDao.actualizar(sp);
+
+            } else {
+                System.out.println("No se encontró ninguna sala_pelicula con ese ID.");
+            }
+    
+        } catch (SQLException e) {
+            System.out.println("Error durante la actualización: " + e.getMessage());
+        }
+    }
+}
+
+
+    /* INTENTO DE AUTOMATIZAR SALAS Y PELICULAS
 
     public void emisionPelicula(){
         String respuesta = "si";
@@ -170,41 +253,6 @@ public class Salas_peliculasView {
         System.out.println(" Programación automática completada.");
     }
     
-    public void eliminarSalasPeliculas(){
-        System.out.println("Ingrese el ID de la sala_pelicula que desee eliminar");
-        int id = sc.nextInt();
-        sc.nextLine();
-        if(dao.eliminarSalasPeliculas(id)){
-            System.out.println("Sala_pelicula eliminada correctamente");
-        }else {
-            System.out.println("No se encontro ninguna Sala_pelicula con ese ID");
-        }
-    }
-
-    public void mostrarSalasPeliculas(){
-        ArrayList<Salas_peliculas> salasPeliculas = dao.mostrarSalasPeliculas();
-        if(salasPeliculas.isEmpty()){
-            System.out.println("No hay salas y peliculas registradas en este momento");
-        } else {
-            System.out.println("\nSalas y peliculas disponibles: ");
-            for(Salas_peliculas sp : salasPeliculas){
-                System.out.println(sp);
-            }
-        } 
-    }
-
-    public void mostrarPorId(){
-        System.out.println("Ingrese el ID de la sala_pelicula que desee mostrar");
-        int id = sc.nextInt();
-        sc.nextLine();
-        Salas_peliculas sp = dao.obtenerPorId(id);
-        if(sp != null){
-            System.out.println(sp);
-        } else {
-            System.out.println("No se encontro ninguna sala_pelicula con ese ID");
-        }
-    }
-
     public void actualizar(){
         System.out.println("Ingrese el ID de la sala_pelicula que desea actualizar:");
         int id = sc.nextInt();
@@ -236,7 +284,7 @@ public class Salas_peliculasView {
         } else {
             System.out.println("No se encontró ninguna sala_pelicula con ese ID.");
         }
-            }*/
-    }
+    }*/
+    
 
 

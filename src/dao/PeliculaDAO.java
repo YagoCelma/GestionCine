@@ -183,7 +183,7 @@ public class PeliculaDAO {
         }
     }
 
-    public Pelicula mostrarPeliculaByTitulo(String titulo) throws SQLException { //Lo he creado para la cartelera
+    public Pelicula mostrarPeliculaByTitulo(String titulo) throws SQLException { //Lo he creado para la cartelera y salas_peliculas
         Connection conexion = dao.ConexionDB.getConnection();
         String query = "SELECT * FROM peliculas WHERE titulo = ?";
         
