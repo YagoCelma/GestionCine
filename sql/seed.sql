@@ -94,29 +94,19 @@ CREATE TABLE IF NOT EXISTS pedidos (
 CREATE TABLE IF NOT EXISTS salas_peliculas( 
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nombre_pelicula VARCHAR(50) NOT NULL, 
-	fecha_incio_emision DATE NOT NULL,  
-	fecha_fin_emision DATE NOT NULL,  
     hora_inicio TIME NOT NULL,  
-    hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de emepezar una pelicula
-    precio_base DEC(2,2),
+    hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de empezar una pelicula
     id_sala INT NOT NULL, 
-    id_pelicula INT NOT NULL ,
-    FOREIGN KEY (id_sala) REFERENCES sala(id_sala), 
-    FOREIGN KEY (id_pelicula) REFERENCES pelicula(id_pelicula),	  
+    precio_base DEC(2,2),
+    id_pelicula INT NOT NULL, 
+    FOREIGN KEY (id_sala) REFERENCES sala(id_sala),  
+    FOREIGN KEY (id_pelicula) REFERENCES peliculas(id_pelicula)
 ); 
 
 CREATE TABLE IF NOT EXISTS cartelera(
     titulo VARCHAR(50) PRIMARY KEY
 )
 
-CREATE TABLE IF NOT EXISTS emision(
-    id
-    nombre
-    duracion
-    fecha_inicio_emision
-    fecha_fin_emision
-
-)
 
 CREATE TABLE IF NOT EXISTS precio_producto(
     id INT AUTO_INCREMENT PRIMARY KEY,

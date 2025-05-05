@@ -47,5 +47,24 @@ public class CarteleraDAO {
         }
         return carteleras;
     }
+
+    public boolean esta(String titulo) {
+        String sql = "SELECT COUNT(*) FROM peliculas WHERE titulo = ?";
+        try (Connection conn = ConexionDB.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, titulo);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
     
 }
