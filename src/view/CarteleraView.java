@@ -1,5 +1,5 @@
 package view;
-
+/* ELIMINADO PAR A QUE SE CREE AUTOMATICO CON EL CROME en salas peliculas
 import dao.CarteleraDAO;
 import dao.PeliculaDAO;
 import java.sql.SQLException;
@@ -79,3 +79,4 @@ public class CarteleraView {
     }
     
 }
+    */

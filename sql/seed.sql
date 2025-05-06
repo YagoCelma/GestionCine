@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nombre_pelicula VARCHAR(50) NOT NULL, 
     hora_inicio TIME NOT NULL,  
-    hora_fin TIME NOT NULL, --Establecer un margen 15 minutos antes de empezar una pelicula
+    hora_fin TIME NOT NULL, 
     id_sala INT NOT NULL, 
     precio_base DEC(2,2),
     id_pelicula INT NOT NULL, 
@@ -103,8 +103,9 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     FOREIGN KEY (id_pelicula) REFERENCES peliculas(id_pelicula)
 ); 
 
+--La he borrado 
 CREATE TABLE IF NOT EXISTS cartelera(
-    titulo VARCHAR(50) PRIMARY KEY
+    titulo VARCHAR(50) PRIMARY KEY  
 )
 
 

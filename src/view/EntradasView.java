@@ -4,6 +4,7 @@ import dao.EntradaDAO;
 import java.util.*;
 import model.Entrada;
 import dao.Salas_peliculasDao;
+import model.Salas_peliculas;
 
 
 public class EntradasView {
@@ -38,15 +39,15 @@ public class EntradasView {
     }
     
     public void venderEntrada(){
+        Salas_peliculasDao sp = new Salas_peliculasDao();
         System.out.println("---PELICULAS DISPONIBLES---");
-        Salas_peliculasDao.mostrarPeliculasDisponibles(); //En el dao de salaPeliculas listar las disponibles con su id
+        sp.mostrar(); //En el dao de salaPeliculas listar las disponibles con su id
 
         System.out.println("ID de la sala pelicula");
         int idSalaPelicula = sc.nextInt();
         sc.nextLine();
 
-        Salas_peliculasDao salaPeliculaDAO = new Salas_peliculasDao();
-        double precioBase = salaPeliculaDAO.obtenerPrecioBase(idSalaPelicula);
+        double precioBase = sp.obtenerPrecioBase(idSalaPelicula); //Falta aun de implementar
         if(precioBase <= 0) {
             System.out.println("Error id de la sala no encontrado");
             return;
