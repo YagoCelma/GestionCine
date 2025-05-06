@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     hora_inicio TIME NOT NULL,  
     hora_fin TIME NOT NULL, 
     id_sala INT NOT NULL, 
-    precio_base DEC(2,2),
+    precio_base DEC(5,2),
     id_pelicula INT NOT NULL, 
     FOREIGN KEY (id_sala) REFERENCES sala(id_sala),  
     FOREIGN KEY (id_pelicula) REFERENCES peliculas(id_pelicula)
