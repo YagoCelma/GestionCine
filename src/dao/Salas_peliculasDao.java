@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Salas_peliculas;
@@ -28,19 +29,75 @@ public class Salas_peliculasDao {
         }
     }
 
-    public boolean eliminar(int id){
+    public boolean  eliminar(int id){
+        try(Connection conn = ConexionDB.getConnection()) {
+            String sql = "DELETE FROM salas_peliculas WHERE ID = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
-    public ArrayList<Salas_peliculas> mostrar(){
-        ArrayList<Salas_peliculas> salas_peliculas = new ArrayList<>();
-        return salas_peliculas;
+public ArrayList<Salas_peliculas> mostrar() {
+    ArrayList<Salas_peliculas> salas_peliculas = new ArrayList<>();
+
+    String sql = "SELECT * FROM salas_peliculas";
+    try (Connection conn = ConexionDB.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Salas_peliculas sp = new Salas_peliculas();
+            sp.setId(rs.getInt("id"));
+            sp.setNombrePelicula(rs.getString("nombre_pelicula"));
+            sp.setHora_inicio(rs.getTime("hora_inicio"));
+            sp.setHora_fin(rs.getTime("hora_fin"));
+            sp.setId_sala(rs.getInt("id_sala"));
+            sp.setPrecioBase(rs.getDouble("precio_base"));
+            sp.setIdPelicula(rs.getInt("id_pelicula"));
+            salas_peliculas.add(sp);
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error al mostrar salas_peliculas: " + e.getMessage());
     }
 
-    public Salas_peliculas buscarSalaPeliPorID(int id){
-        Salas_peliculas sp = null;
-        return sp;
+    return salas_peliculas;
+}
+
+public Salas_peliculas buscarSalaPeliPorID(int id) {
+    Salas_peliculas sp = null;
+
+    String sql = "SELECT * FROM salas_peliculas WHERE id = ?";
+
+    try (Connection conn = ConexionDB.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            sp = new Salas_peliculas();
+            sp.setId(rs.getInt("id"));
+            sp.setNombrePelicula(rs.getString("nombre_pelicula"));
+            sp.setHora_inicio(rs.getTime("hora_inicio"));
+            sp.setHora_fin(rs.getTime("hora_fin"));
+            sp.setId_sala(rs.getInt("id_sala"));
+            sp.setPrecioBase(rs.getDouble("precio_base"));
+            sp.setIdPelicula(rs.getInt("id_pelicula"));
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error al buscar sala_pelicula por ID: " + e.getMessage());
     }
+
+    return sp;
+}
 
     public void actualizar(Salas_peliculas sp) {
         String sql = "UPDATE salas_peliculas SET nombre_pelicula = ?, hora_inicio = ?, hora_fin = ?, id_sala = ?, precio_base = ?, id_pelicula = ? WHERE id = ?";
@@ -54,7 +111,7 @@ public class Salas_peliculasDao {
             stmt.setInt(4, sp.getId_sala());
             stmt.setDouble(5, sp.getPrecioBase());
             stmt.setInt(6, sp.getIdPelicula());
-            stmt.setInt(7, sp.getId()); // importante para el WHERE
+            stmt.setInt(7, sp.getId()); 
     
             int filasActualizadas = stmt.executeUpdate();
     
@@ -71,57 +128,8 @@ public class Salas_peliculasDao {
 
     
 }
-    /* 
-    public void agregarSalaPelicula(Salas_peliculas salas_peliculas){
-        try(Connection conn = ConexionDB.getConnection()) {
-            String sql = "INSERT INTO salas_peliculas (nombre_pelicula, fecha_incio_emision, fecha_fin_emision, hora_inicio, hora_fin)  ";
-            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, salas_peliculas.getNombre());
-            stmt.setDate(2, salas_peliculas.getfecha_inicio_emision());
-            stmt.setDate(3, salas_peliculas.getfecha_fin_emision());
-            stmt.setTime(4, salas_peliculas.getHora_inicio());
-            stmt.setTime(5, salas_peliculas.getHora_fin());
 
-            stmt.executeUpdate();
-            ResultSet keys = stmt.getGeneratedKeys();
-            if (keys.next()){
-                salas_peliculas.setId(keys.getInt(1));
-            }
-
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean  eliminarSalasPeliculas(int id){
-        try(Connection conn = ConexionDB.getConnection()) {
-            String sql = "DELETE FROM salas_peliculas WHERE ID = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public ArrayList<Salas_peliculas> mostrarSalasPeliculas(){
-        ArrayList<Salas_peliculas> salas_peliculas = new ArrayList<>();
-        return salas_peliculas;
-    }
-
-    public Salas_peliculas obtenerPorId(int id){
-        Salas_peliculas sp = null;
-        return sp;
-    }
-
-    public void actualizarSalaPelicula(Salas_peliculas salas_peliculas){
-
-    }
-
+/* 
     public double obtenerPrecioBase(int idSalaPelicula) {
     String sql = "SELECT precio_base FROM salas_peliculas WHERE id = ?";
     try(Connection conn = ConexionDB.getConnection();
@@ -138,5 +146,5 @@ public class Salas_peliculasDao {
     }
         return 0.0; 
     }
-    */
+*/
 
