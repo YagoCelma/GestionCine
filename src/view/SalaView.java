@@ -33,11 +33,15 @@ public class SalaView {
     }
 
     public void crearSala(){
-        System.out.println("Indique la capacidad de la sala");
-        int capacidad = sc.nextInt();
+        System.out.println("Indique el numero de filas de la sala");
+        int numeroFilas = sc.nextInt();
         sc.nextLine();
 
-        Sala sala = new Sala(capacidad);
+        System.out.println("Indique el numero de columnas de la sala");
+        int numeroColumnas = sc.nextInt();
+        sc.nextLine();
+
+        Sala sala = new Sala(numeroFilas, numeroColumnas);
         SalaDAO salaDAO = new SalaDAO();
         salaDAO.crearSala(sala);
         System.out.println("Se ha creado la sala correctamente");
@@ -93,10 +97,16 @@ public class SalaView {
     }
 
     public void modificarCapacidad(Sala sala){
-        System.out.println("Introduce la nueva capacidad de al sala");
-        int capacidad = sc.nextInt();
+        System.out.println("Introduce el numero de filas de la sala");
+        int numeroFilas = sc.nextInt();
         sc.nextLine();
-        sala.setCapacidad(capacidad);
+
+        System.out.println("Introduce el numero de columnas de la sala");
+        int numeroColumnas = sc.nextInt();
+        sc.nextLine();
+        
+        sala.setNumeroFilas(numeroFilas);
+        sala.setNumeroColumnas(numeroColumnas);
     }
 
     public void mostrarSala(){
