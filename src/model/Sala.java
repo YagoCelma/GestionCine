@@ -3,10 +3,12 @@ package model;
 public class Sala {
     
     private int id;
-    private int capacidad;
+    private int numeroFilas;
+    private int numeroColumnas;
 
-    public Sala(int capacidad){
-        this.capacidad = capacidad;
+    public Sala(int numeroFilas, int numeroColumnas){
+        this.numeroFilas = numeroFilas;
+        this.numeroColumnas = numeroColumnas;
     }
 
     public Sala(){
@@ -15,7 +17,10 @@ public class Sala {
 
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
+    
+    public int getNumeroFilas() {return numeroFilas;}
+    public void setNumeroFilas(int numeroFilas) {this.numeroFilas = numeroFilas;}
 
-    public int getCapacidad() {return capacidad;}
-    public void setCapacidad(int capacidad) {this.capacidad = capacidad;}
+    public int getNumeroColumnas() {return numeroColumnas;}
+    public void setNumeroColumnas(int numeroColumnas) {this.numeroColumnas = numeroColumnas;}
 }
