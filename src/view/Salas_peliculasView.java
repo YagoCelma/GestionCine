@@ -175,6 +175,8 @@ public class Salas_peliculasView {
             System.out.println("Error durante la actualización: " + e.getMessage());
         }
     }
+
+    
 }
 
 

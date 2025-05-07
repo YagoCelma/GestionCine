@@ -47,16 +47,36 @@ public class EntradasView {
         int idSalaPelicula = sc.nextInt();
         sc.nextLine();
 
+        Salas_peliculas salaPelicula = sp.salaPeliculaPorID(idSalaPelicula);
         double precioBase = sp.obtenerPrecioBase(idSalaPelicula); //Falta aun de implementar
-        if(precioBase <= 0) {
-            System.out.println("Error id de la sala no encontrado");
+        if(salaPelicula == null) {
+            System.out.println("Error: ID de sala no encontrado");
             return;
         }
-            
 
-        System.out.println("Numero de asiento");
-        int asiento = sc.nextInt();
+        System.out.println("\n--- MAPA DE ASIENTOS ---");
+        salaPelicula.mostrarSala();
+
+        System.out.print("\nIngrese fila del asiento: ");
+        int fila = sc.nextInt();
+        System.out.print("Ingrese columna del asiento: ");
+        int columna = sc.nextInt();
         sc.nextLine();
+
+        boolean esDiscapacitado = false;
+        if(salaPelicula.getAsientos()[fila][columna] == 'D') {
+            System.out.print("¿Es para persona con discapacidad? (s/n): ");
+            esDiscapacitado = sc.nextLine().equalsIgnoreCase("s");
+        }
+        
+        // Intentar reservar el asiento
+        if(!salaPelicula.reservarAsiento(fila, columna, esDiscapacitado)) {
+            System.out.println("No se pudo reservar el asiento. Puede que ya esté ocupado.");
+            return;
+        }
+        
+        // Calcular número de asiento único
+        int numeroAsiento = fila * 100 + columna;
 
         System.out.println("\nTIPOS DE DESCUENTO:");
         System.out.println("0. Ninguno (precio completo)");
@@ -69,10 +89,10 @@ public class EntradasView {
 
         double precioFinal = calcularPrecioDescuento(precioBase, tipoDescuento);
 
-        Entrada entrada = new Entrada(asiento, idSalaPelicula, precioFinal);
+        Entrada entrada = new Entrada(numeroAsiento, idSalaPelicula, precioFinal);
 
         if(tipoDescuento == 1){
-            System.out.println("Introduzca DNI");
+            System.out.println("Introduzca DNI del socio:");
             entrada.setDniSocio(sc.nextLine());
         }
       

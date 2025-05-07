@@ -2,8 +2,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Sala;
 import model.Salas_peliculas;
 
 public class Salas_peliculasDao {
@@ -69,6 +71,53 @@ public class Salas_peliculasDao {
         }
     }
 
+    public Salas_peliculas salaPeliculaPorID(int id){
+        String sql = "SELECT * FROM salas_peliculas WHERE id = ?";
+        try (Connection conn = ConexionDB.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+                        try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Salas_peliculas salaPelicula = new Salas_peliculas();
+                    salaPelicula.setId(rs.getInt("id"));
+                    salaPelicula.setNombrePelicula(rs.getString("nombre_pelicula"));
+                    salaPelicula.setHora_inicio(rs.getTime("hora_inicio"));
+                    salaPelicula.setHora_fin(rs.getTime("hora_fin"));
+                    salaPelicula.setId_sala(rs.getInt("id_sala"));
+                    salaPelicula.setPrecioBase(rs.getDouble("precio_base"));
+                    salaPelicula.setIdPelicula(rs.getInt("id_pelicula"));
+                    
+                    // Obtener la sala completa para generar los asientos
+                    SalaDAO salaDao = new SalaDAO();
+                    Sala sala = salaDao.salaPorID(salaPelicula.getId_sala());
+                    salaPelicula.setAsientos(salaPelicula.generarSala(sala));
+                    
+                    return salaPelicula;
+                }
+            }
+        }catch(SQLException e){
+            System.out.println("Error al obtener sala-película por ID: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public double obtenerPrecioBase(int id) {
+        String sql = "SELECT precio_base FROM salas_peliculas WHERE id = ?";
+        
+        try (Connection conn = ConexionDB.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("precio_base");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener precio base: " + e.getMessage());
+        }
+        return -1; // Valor inválido para indicar error
+    }
     
 }
     /* 

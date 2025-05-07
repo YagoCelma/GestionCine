@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS empleados(
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     telefono INT(15) NOT NULL,
-    email VARCHAR(100) NOT NULL, --samu 
+    email VARCHAR(100) NOT NULL, 
     puesto VARCHAR(50) NOT NULL,
     salario DECIMAL(10, 2) NOT NULL,
     fecha_contratacion DATE NOT NULL
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS clientes(
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
-    apellido VARCHAR(100) NOT NULL, --yago
+    apellido VARCHAR(100) NOT NULL,
     telefono INT(15) NOT NULL,
     email VARCHAR(100) NOT NULL
 );
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS inventario_peliculas (
     id_inventario_peliculas INT AUTO_INCREMENT PRIMARY KEY,
     nombre_producto VARCHAR(50),
     cantidad INT NOT NULL,
-    cantidad_minima INT NOT NULL, --hacer un trigger
+    cantidad_minima INT NOT NULL,
     id_proveedor INT NOT NULL,
     FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
 );
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS inventario_productos (
     id_inventario_producto INT AUTO_INCREMENT PRIMARY KEY,
     nombre_producto VARCHAR(100),
     cantidad INT NOT NULL,
-    cantidad_minima INT NOT NULL, --hacer otro trigger
+    cantidad_minima INT NOT NULL,
     id_proveedor INT NOT NULL,
     FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
 );
@@ -61,8 +61,7 @@ CREATE TABLE IF NOT EXISTS peliculas (
     genero VARCHAR(100) NOT NULL,
     duracion INT NOT NULL,
     clasificacion VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2) NOT NULL,
-    en_cartelera BOOLEAN NOT NULL
+    precio DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS entradas (
@@ -75,7 +74,8 @@ CREATE TABLE IF NOT EXISTS entradas (
 
 CREATE TABLE IF NOT EXISTS sala (
     id_sala INT AUTO_INCREMENT PRIMARY KEY, 
-    capacidad INT NOT NULL
+    numeroFilas INT NOT NULL,
+    numeroColumnas INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS pedidos (
@@ -101,15 +101,10 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     FOREIGN KEY (id_pelicula) REFERENCES peliculas(id_pelicula)
 ); 
 
---La he borrado 
-CREATE TABLE IF NOT EXISTS cartelera(
-    titulo VARCHAR(50) PRIMARY KEY  
-)
-
 
 CREATE TABLE IF NOT EXISTS precio_producto(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL, --isma
+    nombre VARCHAR(50) NOT NULL,
     precio DEC(5,2) NOT NULL
 ); 
 
