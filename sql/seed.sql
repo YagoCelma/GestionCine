@@ -61,7 +61,9 @@ CREATE TABLE IF NOT EXISTS peliculas (
     genero VARCHAR(100) NOT NULL,
     duracion INT NOT NULL,
     clasificacion VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2) NOT NULL
+    precio DECIMAL(10,2) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS entradas (
@@ -80,7 +82,7 @@ CREATE TABLE IF NOT EXISTS sala (
 
 CREATE TABLE IF NOT EXISTS pedidos (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente INT NOT NULL,
+    id_proveedor INT NOT NULL,
     fecha_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_articulo INT NOT NULL,
     cantidad INT NOT NULL,
@@ -93,8 +95,8 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nombre_pelicula VARCHAR(50) NOT NULL, 
     hora_inicio TIME NOT NULL,  
-    hora_fin TIME NOT NULL, 
-    id_sala INT NOT NULL, 
+    hora_fin TIME NOT NULL,
+    id_sala INT NOT NULL,
     precio_base DEC(5,2),
     id_pelicula INT NOT NULL, 
     FOREIGN KEY (id_sala) REFERENCES sala(id_sala),  
@@ -102,11 +104,11 @@ CREATE TABLE IF NOT EXISTS salas_peliculas(
 ); 
 
 
-CREATE TABLE IF NOT EXISTS precio_producto(
+CREATE TABLE IF NOT EXISTS producto(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     precio DEC(5,2) NOT NULL
-); 
+);
 
 
 CREATE TABLE IF NOT EXISTS inventario_pelicula (
@@ -117,20 +119,15 @@ CREATE TABLE IF NOT EXISTS inventario_pelicula (
     FOREIGN KEY (pelicula_id) REFERENCES peliculas(id)
 );
 
--- Validación de fechas en salas_peliculas
+-- Validación de fechas en peliculas
 DELIMITER //
 CREATE TRIGGER validar_fechas_salas_peliculas
-BEFORE INSERT ON salas_peliculas
+BEFORE INSERT ON peliculas
 FOR EACH ROW
 BEGIN
-    IF NEW.fecha_fin_emision < NEW.fecha_incio_emision THEN
+    IF NEW.fecha_fin < NEW.fecha_inicio THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'La fecha de fin debe ser posterior a la fecha de inicio';
-    END IF;
-    
-    IF NEW.hora_fin <= NEW.hora_inicio THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'La hora de fin debe ser posterior a la hora de inicio';
     END IF;
 END//
 DELIMITER ;
@@ -148,17 +145,6 @@ BEGIN
 END//
 DELIMITER ;
 
-
--- Actualización de cartelera
-DELIMITER //
-CREATE TRIGGER actualizar_cartelera
-AFTER INSERT ON salas_peliculas
-FOR EACH ROW
-BEGIN
-    INSERT IGNORE INTO cartelera (titulo)
-    VALUES (NEW.nombre_pelicula);
-END//
-DELIMITER ;
 
 -- Validación de horarios 
 DELIMITER //
@@ -183,6 +169,19 @@ BEGIN
     IF hay_solapamiento > 0 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Existe un solapamiento en la sala';
+    END IF;
+END//
+DELIMITER ;
+
+
+DELIMITER //
+CREATE TRIGGER validar_horas_salas_peliculas
+BEFORE INSERT ON salas_peliculas
+FOR EACH ROW
+BEGIN
+    IF NEW.hora_fin <= NEW.hora_inicio THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La hora de fin debe ser posterior a la hora de inicio';
     END IF;
 END//
 DELIMITER ;
