@@ -87,7 +87,6 @@ CREATE TABLE IF NOT EXISTS pedidos (
     id_articulo INT NOT NULL,
     cantidad INT NOT NULL,
     precio_total DECIMAL(10, 2) NOT NULL,
-    estado ENUM('PENDIENTE', 'PAGADO', 'ENTREGADO', 'CANCELADO') NOT NULL,
     FOREIGN KEY (id_cliente) REFERENCES clientes(id)
 );
 
