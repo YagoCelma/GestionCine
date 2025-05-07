@@ -20,10 +20,9 @@ public class EmpleadoDao {
 
             stmt.executeUpdate();
 
-            //Esto lo hacemos para obtener el ID generado
             ResultSet keys = stmt.getGeneratedKeys();
             if (keys.next()) {
-                empleado.setId(keys.getInt(1)); //Actualizamos el objeto empeleado
+                empleado.setId(keys.getInt(1)); 
             }
 
         } catch (SQLException e) {
@@ -37,7 +36,7 @@ public class EmpleadoDao {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
             int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0; //esto devuelve true si se elimino al menos un empleado
+            return rowsAffected > 0; 
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,17 +69,21 @@ public class EmpleadoDao {
 
     public Empleado obtenerPorId(int id){
         Empleado emp = null;
-        String sql = "SELECT FROM empleados WHERE Id = ?";
+        String sql = "SELECT * FROM empleados WHERE id = ?";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
+                emp = new Empleado(); 
                 emp.setId(resultSet.getInt("id"));
                 emp.setNombre(resultSet.getString("nombre"));
                 emp.setApellido(resultSet.getString("apellido"));
                 emp.setTelefono(resultSet.getInt("telefono"));
                 emp.setEmail(resultSet.getString("email"));
+                emp.setPuesto(resultSet.getString("puesto"));
+                emp.setSalario(resultSet.getDouble("salario")); 
+                emp.setFechaContratacion(resultSet.getDate("fecha_contratacion"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,12 +96,13 @@ public class EmpleadoDao {
             String sql = "UPDATE empleados SET nombre = ?, apellido = ?, telefono = ?, email = ?, puesto = ?, salario = ?, fecha_contratacion = ? WHERE id = ? ";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, empleado.getNombre());
-            statement.setString(1, empleado.getApellido());
-            statement.setInt(1, empleado.getTelefono());
-            statement.setString(1, empleado.getEmail());
-            statement.setString(1, empleado.getPuesto());
-            statement.setDouble(1, empleado.getSalario());
-            statement.setDate(1, empleado.getFechaContratacion());
+            statement.setString(2, empleado.getApellido());
+            statement.setInt(3, empleado.getTelefono());
+            statement.setString(4, empleado.getEmail());
+            statement.setString(5, empleado.getPuesto());
+            statement.setDouble(6, empleado.getSalario());
+            statement.setDate(7, empleado.getFechaContratacion());
+            statement.setInt(8, empleado.getId());
 
             statement.executeUpdate();
 
@@ -107,6 +111,4 @@ public class EmpleadoDao {
         }
     }
 
-    
-    
 }

@@ -27,6 +27,7 @@ public class Salas_peliculasView {
             System.out.println("5. Actualizar salas y peliculas");
             System.out.println("6. Volver al menu principal");
             opcion = sc.nextInt();
+            sc.nextLine();
 
             switch(opcion){
                 case 1 -> this.crearSalaPelicula();
