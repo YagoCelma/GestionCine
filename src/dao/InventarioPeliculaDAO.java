@@ -16,7 +16,7 @@ public class InventarioPeliculaDAO {
     private ResultSet rs;
     
     public boolean insertarInventario(InventarioPelicula inventarioPelicula) {
-        String sql = "INSERT INTO inventario_pelicula (pelicula_id, copias, copias_disponibles) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO inventario_pelicula (id_pelicula, copias, copias_disponibles) VALUES (?, ?, ?)";
         try {
             Connection conexion = dao.ConexionDB.getConnection();
             ps = conexion.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class InventarioPeliculaDAO {
     }
     
     public boolean actualizarInventario(InventarioPelicula inventarioPelicula) {
-        String sql = "UPDATE inventario_pelicula SET pelicula_id=?, copias=?, copias_disponibles=? WHERE id=?";
+        String sql = "UPDATE inventario_pelicula SET id_pelicula=?, copias=?, copias_disponibles=? WHERE id=?";
         try {
             Connection conexion = dao.ConexionDB.getConnection();
             ps = conexion.prepareStatement(sql);
@@ -93,7 +93,7 @@ public class InventarioPeliculaDAO {
                 inventario.setId(rs.getInt("id"));
                 
                 PeliculaDAO peliculaDAO = new PeliculaDAO();
-                Pelicula pelicula = peliculaDAO.mostrarPeliculaByID(rs.getInt("pelicula_id"));
+                Pelicula pelicula = peliculaDAO.mostrarPeliculaByID(rs.getInt("id_pelicula"));
                 inventario.setPelicula(pelicula);
                 
                 inventario.setCopias(rs.getInt("copias"));
@@ -128,7 +128,7 @@ public class InventarioPeliculaDAO {
                 inventario.setId(rs.getInt("id"));
                 
                 PeliculaDAO peliculaDAO = new PeliculaDAO();
-                Pelicula pelicula = peliculaDAO.mostrarPeliculaByID(rs.getInt("pelicula_id"));
+                Pelicula pelicula = peliculaDAO.mostrarPeliculaByID(rs.getInt("id_pelicula"));
                 inventario.setPelicula(pelicula);
                 
                 inventario.setCopias(rs.getInt("copias"));
