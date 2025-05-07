@@ -98,7 +98,7 @@ public class EmpleadoView {
     }
 
     public void actualizarEmpleado(){
-        System.out.println("Introduce el ID del epleado a actualizar");
+        System.out.println("Introduce el ID del empleado a actualizar");
         int id = sc.nextInt();
         sc.nextLine();
         EmpleadoDao empleadoDao = new EmpleadoDao();
