@@ -19,6 +19,7 @@ public class App {
         InventarioPeliculaView inventarioPeliculaView = new InventarioPeliculaView();
         EntradasView entradasView = new EntradasView();
         Salas_peliculasView salas_peliculasView = new Salas_peliculasView();
+        CineConfigEditor cineConfigEditor = new CineConfigEditor();
 
         Scanner sc = new Scanner(System.in);
         int resp ; 
@@ -70,7 +71,8 @@ public class App {
                             System.out.println("5. Proveedores");
                             System.out.println("6. Inventario peliculas");
                             System.out.println("7. Salas y peliculas ");
-                            System.out.println("8. Salir");
+                            System.out.println("8. Configuración del cine");
+                            System.out.println("9. Salir");
                             System.out.print("Seleccione una opción: ");
                             opcion = sc.nextInt();
                             sc.nextLine();
@@ -83,10 +85,11 @@ public class App {
                                 case 5-> proveedorView.menuProveedor();
                                 case 6 -> inventarioPeliculaView.menuPrincipal();
                                 case 7 -> salas_peliculasView.gestionSalas_Peliculas();
-                                case 8-> System.out.println("Hasta pronto...");
+                                case 8 ->cineConfigEditor.configuración();
+                                case 9-> System.out.println("Hasta pronto...");
                                 default->System.out.println("Valor no valido, vuelve a intentarlo");
                             }
-                        }while(opcion != 8);
+                        }while(opcion != 9);
                     } else{
                         System.out.println("usuario o contraseña incorrectos");
                     }

@@ -10,7 +10,7 @@ public class CineConfigEditor {
     private static JSONObject config;
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public void configuración() {
         try {
             // Cargar configuración
             String jsonStr = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)));
@@ -64,7 +64,7 @@ public class CineConfigEditor {
         }
     }
 
-    private static void editarInformacionBasica(JSONObject cine) {
+    private void editarInformacionBasica(JSONObject cine) {
         System.out.println("\n--- INFORMACIÓN BÁSICA ---");
         System.out.println("1. Nombre actual: " + cine.getString("nombre"));
         System.out.println("2. Dirección actual: " + cine.getString("direccion"));
@@ -89,7 +89,7 @@ public class CineConfigEditor {
         }
     }
 
-    private static void editarHorarios(JSONObject cine) {
+    private void editarHorarios(JSONObject cine) {
         System.out.println("\n--- HORARIOS ---");
         System.out.println("1. Horario apertura: " + cine.getString("horarioApertura"));
         System.out.println("2. Horario cierre: " + cine.getString("horarioCierre"));
@@ -131,7 +131,7 @@ public class CineConfigEditor {
         }
     }
 
-    private static void editarPromociones(JSONObject cine) {
+    private void editarPromociones(JSONObject cine) {
         JSONArray promociones = cine.getJSONArray("promociones");
         System.out.println("\n--- PROMOCIONES ---");
         
@@ -175,7 +175,7 @@ public class CineConfigEditor {
         }
     }
 
-    private static void editarTextosPublicitarios(JSONObject cine) {
+    private void editarTextosPublicitarios(JSONObject cine) {
         JSONObject textos = cine.getJSONObject("textosPublicitarios");
         System.out.println("\n--- TEXTOS PUBLICITARIOS ---");
         System.out.println("1. Mensaje bienvenida: " + textos.getString("bienvenida"));
@@ -197,7 +197,7 @@ public class CineConfigEditor {
         }
     }
 
-    private static void editarPoliticas(JSONObject cine) {
+    private void editarPoliticas(JSONObject cine) {
         JSONObject politicas = cine.getJSONObject("politicas");
         System.out.println("\n--- POLÍTICAS ---");
         System.out.println("1. Política devoluciones: " + politicas.getString("devoluciones"));
@@ -225,7 +225,7 @@ public class CineConfigEditor {
         }
     }
 
-    private static void editarTemporadas(JSONObject cine) {
+    private void editarTemporadas(JSONObject cine) {
         JSONArray temporadas = cine.getJSONArray("temporadas");
         System.out.println("\n--- TEMPORADAS ESPECIALES ---");
         
@@ -264,7 +264,7 @@ public class CineConfigEditor {
         }
     }
 
-    private static void guardarConfiguracion() throws Exception {
+    private void guardarConfiguracion() throws Exception {
         Files.write(Paths.get(CONFIG_FILE), config.toString(4).getBytes());
     }
 }
