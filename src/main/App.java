@@ -18,7 +18,7 @@ public class App {
         ProveedorView proveedorView = new ProveedorView();
         InventarioPeliculaView inventarioPeliculaView = new InventarioPeliculaView();
         EntradasView entradasView = new EntradasView();
-        CarteleraView carteleraView = new CarteleraView();
+        //CarteleraView carteleraView = new CarteleraView();
         Salas_peliculasView salas_peliculasView = new Salas_peliculasView();
 
         Scanner sc = new Scanner(System.in);
@@ -84,7 +84,7 @@ public class App {
                                 case 4-> salaView.menuSala();
                                 case 5-> proveedorView.menuProveedor();
                                 case 6 -> inventarioPeliculaView.menuPrincipal();
-                                case 7 -> carteleraView.gestionCartelera();
+                                //case 7 -> carteleraView.gestionCartelera();
                                 case 8 -> salas_peliculasView.gestionSalas_Peliculas();
                                 case 9-> System.out.println("Hasta pronto...");
                                 default->System.out.println("Valor no valido, vuelve a intentarlo");
@@ -118,7 +118,7 @@ public class App {
                             switch(opcion2){
                                 case 1 -> clienteView.menuCliente();
                                 case 2 -> entradasView.menuEntrada();
-                                case 3 -> carteleraView.mostrarCartelera();
+                                //case 3 -> carteleraView.mostrarCartelera();
                                 case 4 -> salas_peliculasView.mostrar();
                                 case 5-> System.out.println("Hasta pronto...");
                                 default->System.out.println("Valor no valido, vuelve a intentarlo");
