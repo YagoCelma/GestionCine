@@ -14,6 +14,7 @@ public class PeliculaView {
         boolean exito = true;
 
         do {
+            System.out.println("                     ");
             System.out.println("¿Qué quieres hacer?");
             System.out.println("1. Añadir pelicula");
             System.out.println("2. Eliminar pelicula");
@@ -40,6 +41,7 @@ public class PeliculaView {
 
     public int elegirOpcion() {
         int opcion = sc.nextInt();
+        sc.nextLine();
         return opcion;
     }
 
@@ -59,36 +61,38 @@ public class PeliculaView {
             exito = false;
             try {
                 System.out.println("Título: ");
-                titulo = sc.next();
+                titulo = sc.nextLine();
 
                 System.out.println("Director: ");
-                director = sc.next();
+                director = sc.nextLine();
 
                 System.out.println("Género: ");
-                genero = sc.next();
+                genero = sc.nextLine();
 
                 System.out.println("Duración (minutos): ");
                 duracion = sc.nextInt();
+                sc.nextLine();
 
                 System.out.println("Clasificación: ");
-                clasificacion = sc.next();
+                clasificacion = sc.nextLine();
 
                 System.out.println("Precio entrada: ");
                 precioEntrada = sc.nextDouble();
+                sc.nextLine();
 
                 System.out.println("Fecha inicio (yyyy-MM-dd): ");
-                String fechaInicioStr = sc.next();
+                String fechaInicioStr = sc.nextLine();
                 fechaInicio = java.sql.Date.valueOf(fechaInicioStr);
 
                 System.out.println("Fecha fin (yyyy-MM-dd): ");
-                String fechaFinStr = sc.next();
+                String fechaFinStr = sc.nextLine();
                 fechaFin = java.sql.Date.valueOf(fechaFinStr);
 
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("¿Quieres volver a intentarlo?");
                 
-                String respuesta = sc.next();
+                String respuesta = sc.nextLine();
                 respuesta = respuesta.toLowerCase();
                 if (respuesta.equals("si")) {
                     exito = true;
@@ -98,7 +102,7 @@ public class PeliculaView {
             }
         } while (exito);
         System.out.println("La pelicula se ha añadido correctamente");
-        return new Pelicula(0, titulo, director, genero, duracion, clasificacion, precioEntrada, fechaInicio, fechaFin);
+        return new Pelicula(titulo, director, genero, duracion, clasificacion, precioEntrada, fechaInicio, fechaFin);
     }
 
     public void modificarPelicula() {
@@ -135,47 +139,49 @@ public class PeliculaView {
                 switch (opcion) {
                     case 1 -> {
                         System.out.println("Nuevo título: ");
-                        nuevoTitulo = sc.next();
+                        nuevoTitulo = sc.nextLine();
                         peliculaDAO.modificarTituloPelicula(id, nuevoTitulo);
                     }
 
                     case 2 -> {
                         System.out.println("Nuevo director: ");
-                        nuevoDirector = sc.next();
+                        nuevoDirector = sc.nextLine();
                         peliculaDAO.modificarDirectorPelicula(id, nuevoDirector);
                     }
 
                     case 3 -> {
                         System.out.println("Nuevo género: ");
-                        nuevoGenero = sc.next();
+                        nuevoGenero = sc.nextLine();
                         peliculaDAO.modificarGeneroPelicula(id, nuevoGenero);
                     }
 
                     case 4 -> {
                         System.out.println("Nueva duración (minutos): ");
                         nuevaDuracion = sc.nextInt();
+                        sc.nextLine();
                         peliculaDAO.modificarDuracionPelicula(id, nuevaDuracion);
                     }
 
                     case 5 -> {
                         System.out.println("Nueva clasificación: ");
-                        nuevaClasificacion = sc.next();
+                        nuevaClasificacion = sc.nextLine();
                         peliculaDAO.modificarClasificacionPelicula(id, nuevaClasificacion);
                     }
 
                     case 6 -> {
                         System.out.println("Nuevo precio entrada: ");
                         nuevoPrecio = sc.nextDouble();
+                        sc.nextLine();
                         peliculaDAO.modificarPrecioPelicula(id, nuevoPrecio);
                     }
 
                     case 7 -> {
                         System.out.println("Nueva fecha inicio (yyyy-MM-dd): ");
-                        String fechaInicioStr = sc.next();
+                        String fechaInicioStr = sc.nextLine();
                         nuevaFechaInicio = java.sql.Date.valueOf(fechaInicioStr);
                         
                         System.out.println("Nueva fecha fin (yyyy-MM-dd): ");
-                        String fechaFinStr = sc.next();
+                        String fechaFinStr = sc.nextLine();
                         nuevaFechaFin = java.sql.Date.valueOf(fechaFinStr);
                         
                         peliculaDAO.modificarFechasPelicula(id, nuevaFechaInicio, nuevaFechaFin);
@@ -189,7 +195,7 @@ public class PeliculaView {
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("¿Quieres volver a intentarlo? (si/no)");
-                respuesta = sc.next().toLowerCase();
+                respuesta = sc.nextLine().toLowerCase();
                 if (!respuesta.equals("si")) {
                     exito = true;
                 }
@@ -221,7 +227,7 @@ public class PeliculaView {
                 peliculaDAO.mostrarPeliculaByID(id);
                 System.out.println("se borrará");
                 System.out.println("¿Quieres continuar?");
-                respuesta = sc.next().toLowerCase();
+                respuesta = sc.nextLine().toLowerCase();
 
                 if ("si".equals(respuesta)) {
                     peliculaDAO.borrarPelicula(id);
@@ -234,7 +240,7 @@ public class PeliculaView {
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("¿Quieres volver a intentarlo? (si/no)");
-                respuesta = sc.next().toLowerCase();
+                respuesta = sc.nextLine().toLowerCase();
                 if (!respuesta.equals("si")) {
                     exito = true;
                 }
