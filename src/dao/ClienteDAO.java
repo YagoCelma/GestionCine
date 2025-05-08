@@ -12,7 +12,7 @@ public class ClienteDAO{
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, cliente.getNombre());
             statement.setString(2, cliente.getApellido());
-            statement.setInt(3, cliente.getTelefono());
+            statement.setString(3, cliente.getTelefono());
             statement.setString(4, cliente.getEmail());
             statement.executeUpdate();
 
@@ -31,10 +31,8 @@ public class ClienteDAO{
             String sql = "DELETE FROM clientes WHERE id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            }
+            int filasAfectadas = statement.executeUpdate();
+            return filasAfectadas > 0;
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -52,7 +50,7 @@ public class ClienteDAO{
                 cliente.setId(resultSet.getInt("id"));
                 cliente.setNombre(resultSet.getString("nombre"));
                 cliente.setApellido(resultSet.getString("apellido"));
-                cliente.setTelefono(resultSet.getInt("telefono"));
+                cliente.setTelefono(resultSet.getString("telefono"));
                 cliente.setEmail(resultSet.getString("email"));
                 clientes.add(cliente);
             }
@@ -75,7 +73,7 @@ public class ClienteDAO{
                 cliente.setId(resultSet.getInt("id"));
                 cliente.setNombre(resultSet.getString("nombre"));
                 cliente.setApellido(resultSet.getString("apellido"));
-                cliente.setTelefono(resultSet.getInt("telefono"));
+                cliente.setTelefono(resultSet.getString("telefono"));
                 cliente.setEmail(resultSet.getString("email"));
             }
         }catch(SQLException e){

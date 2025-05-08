@@ -11,6 +11,7 @@ public class ClienteView {
     public void menuCliente(){
         int opcion;
         do{
+            System.out.println("                ");
             System.out.println("Menu de Clientes");
             System.out.println("1. Añadir cliente");
             System.out.println("2. Borrar cliente");
@@ -40,8 +41,7 @@ public class ClienteView {
         System.out.println("Introduzca el DNI");
         String dni = sc.nextLine();
         System.out.println("Introduzca el telefono");
-        int telefono = sc.nextInt();
-        sc.nextLine();
+        String telefono = sc.nextLine();
         System.out.println("Introduzca el email");
         String email = sc.nextLine();
 
@@ -117,7 +117,7 @@ public class ClienteView {
                 case 4-> actualizarEmail(cliente);
                 case 5-> System.out.println("Saliendo...");
             }
-        }while(opcion != 6);
+        }while(opcion != 5);
     }
 
     public void actualizarNombre(Cliente cliente){
@@ -136,8 +136,7 @@ public class ClienteView {
 
     public void actualizarTelefono(Cliente cliente){
         System.out.println("Introduce el nuevo apellido");
-        int telefono = sc.nextInt();
-        sc.nextLine();
+        String telefono = sc.nextLine();
         cliente.setTelefono(telefono);
         System.out.println("Actualizado con exito");
     }
