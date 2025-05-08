@@ -6,10 +6,10 @@ public class Cliente {
     private String nombre;
     private String apellidos;
     private String dni;
-    private int telefono;
+    private String telefono;
     private String email;
 
-    public Cliente(String nombre, String apellidos,String dni, int telefono, String email){
+    public Cliente(String nombre, String apellidos,String dni, String telefono, String email){
 
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -38,11 +38,25 @@ public class Cliente {
 
     public void setApellido(String apellido) {this.apellidos = apellidos;}
 
-    public int getTelefono() {return telefono;}
+    public String getTelefono() {return telefono;}
 
-    public void setTelefono(int telefono) {this.telefono = telefono;}
+    public void setTelefono(String telefono) {this.telefono = telefono;}
     
     public String getEmail() {return email;}
 
     public void setEmail(String email) {this.email = email;}
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellidos + '\'' +
+                ", dni='" + dni + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
 }
+
