@@ -10,9 +10,10 @@ public class Producto {
 
     }
 
-    public Producto(int id, String nombre, double precio){ 
+    public Producto(String nombre, double precio){ 
         
-        this.id = id; this.nombre = nombre; this.precio = precio; 
+        this.nombre = nombre; 
+        this.precio = precio; 
     }
 
     public int getId() { return id; }

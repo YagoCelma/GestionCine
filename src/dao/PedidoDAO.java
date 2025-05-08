@@ -33,7 +33,7 @@ public class PedidoDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
             int filasAfectadas = statement.executeUpdate();
-            return filasAfectadas > 0; // Devuelve true si se eliminó al menos una fila
+            return filasAfectadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
