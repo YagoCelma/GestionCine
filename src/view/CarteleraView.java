@@ -19,7 +19,7 @@ public class CarteleraView {
         int opcion = 0;
 
         do { 
-            System.out.println("\n Bienvenido a la cartelera ");
+            System.out.println("Bienvenido a la cartelera ");
             System.out.println("1. Crear cartelera ");
             System.out.println("2. Eliminar pelicula de la cartelera ");
             System.out.println("3. Mostrar cartelera ");
