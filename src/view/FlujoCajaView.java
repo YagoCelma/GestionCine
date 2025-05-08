@@ -8,48 +8,8 @@ import model.FlujoCaja;
 
 
 public class FlujoCajaView {
-    PeliculaView peliculaView = new PeliculaView();
     Scanner scanner = new Scanner(System.in);
 
-    
-    public void menuPrincipal() {
-        boolean exito = false;
-        do { 
-            System.out.println("Menú principal");
-            System.out.println("1. Registrar cobro");
-            System.out.println("2. Registrar pago");
-            System.out.println("3. Mostrar balance total");
-            System.out.println("4. Mostrar balance del mes");
-            System.out.println("4. Registrar gastos de nóminas");
-            System.out.println("4. Volver atras");
-            System.out.println("5. Salir");
-            System.out.print("Seleccione una opción: ");
-        
-            switch (peliculaView.elegirOpcion()) {
-                /*case 1 -> {
-                mostrarIngresos();
-                exito = true;
-            }*/
-
-                case 2 -> {
-                    mostrarGastos();
-                    exito = true;
-                }
-                case 3 -> {
-                    mostrarBalance();
-                    exito = true;
-                }
-                case 4 -> menuPrincipal();
-                
-                case 5 -> System.exit(0);
-                default -> {
-                    System.out.println("Opción no válida");
-                    exito = true;
-                }
-            }
-        } while (!exito);
-
-    }
 
     public void mostrarMenu() {
         FlujoCajaDAO dao = new FlujoCajaDAO();
