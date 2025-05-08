@@ -1,6 +1,8 @@
 package view;
 
 import dao.PeliculaDAO;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.Scanner;
 import model.Pelicula;
 
@@ -17,15 +19,16 @@ public class PeliculaView {
             System.out.println("2. Eliminar pelicula");
             System.out.println("3. Modificar pelicula");
             System.out.println("4. Listar peliculas");
-            System.out.println("4. Volver atras");
-            System.out.println("5. Salir");
+            System.out.println("5. Volver atras");
+            System.out.println("6. Salir");
 
             switch (elegirOpcion()) {
                 case 1 -> anadirPelicula();
                 case 2 -> borrarPelicula();
                 case 3 -> modificarPelicula();
-                // case 4 -> listarPelicula();
-                case 5 -> System.exit(0);
+                case 4 -> listarPeliculas();
+                case 5 -> menuPrincipal();
+                case 6 -> System.exit(0);
                 default -> {
                     System.out.println("Opción no válida");
                     exito = false;
@@ -47,7 +50,8 @@ public class PeliculaView {
         int duracion = 0;
         String clasificacion = "";
         double precioEntrada = 0.0;
-        boolean enCartelera = false;
+        Date fechaInicio = null;
+        Date fechaFin = null;
 
         boolean exito;
 
@@ -72,6 +76,14 @@ public class PeliculaView {
                 System.out.println("Precio entrada: ");
                 precioEntrada = sc.nextDouble();
 
+                System.out.println("Fecha inicio (yyyy-MM-dd): ");
+                String fechaInicioStr = sc.next();
+                fechaInicio = java.sql.Date.valueOf(fechaInicioStr);
+
+                System.out.println("Fecha fin (yyyy-MM-dd): ");
+                String fechaFinStr = sc.next();
+                fechaFin = java.sql.Date.valueOf(fechaFinStr);
+
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("¿Quieres volver a intentarlo?");
@@ -85,23 +97,22 @@ public class PeliculaView {
                 }
             }
         } while (exito);
-        System.out.println(
-                "La pelicula se ha añadido correctamente");
-        return new Pelicula(0, titulo, director, genero, duracion, clasificacion, precioEntrada, enCartelera); // El id se genera despues con el auto increment
+        System.out.println("La pelicula se ha añadido correctamente");
+        return new Pelicula(0, titulo, director, genero, duracion, clasificacion, precioEntrada, fechaInicio, fechaFin);
     }
 
     public void modificarPelicula() {
         int id;
-        int opcion;
-        String nuevoTitulo;
-        String nuevoDirector;
-        String nuevoGenero;
-        int nuevaDuracion;
-        String nuevaClasificacion;
-        double nuevoPrecio;
-        boolean enCartelera;
-        boolean exito;
+        String nuevoTitulo = "";
+        String nuevoDirector = "";
+        String nuevoGenero = "";
+        int nuevaDuracion = 0;
+        String nuevaClasificacion = "";
+        double nuevoPrecio = 0.0;
+        Date nuevaFechaInicio = null;
+        Date nuevaFechaFin = null;
         String respuesta;
+        boolean exito;
 
         do {
             exito = false;
@@ -116,10 +127,10 @@ public class PeliculaView {
                 System.out.println("4. Duración");
                 System.out.println("5. Clasificación");
                 System.out.println("6. Precio entrada");
-                System.out.println("7. En cartelera");
-                System.out.println("8. Todo");
-                System.out.println("9. Salir");
-                opcion = sc.nextInt();
+                System.out.println("7. Fechas de proyección");
+                System.out.println("8. Salir al menu principal");
+
+                int opcion = sc.nextInt();
 
                 switch (opcion) {
                     case 1 -> {
@@ -159,43 +170,22 @@ public class PeliculaView {
                     }
 
                     case 7 -> {
-                        System.out.println("¿Está en cartelera? (true/false): ");
-                        enCartelera = sc.nextBoolean();
-                        peliculaDAO.modificarEnCartelera(id, enCartelera);
+                        System.out.println("Nueva fecha inicio (yyyy-MM-dd): ");
+                        String fechaInicioStr = sc.next();
+                        nuevaFechaInicio = java.sql.Date.valueOf(fechaInicioStr);
+                        
+                        System.out.println("Nueva fecha fin (yyyy-MM-dd): ");
+                        String fechaFinStr = sc.next();
+                        nuevaFechaFin = java.sql.Date.valueOf(fechaFinStr);
+                        
+                        peliculaDAO.modificarFechasPelicula(id, nuevaFechaInicio, nuevaFechaFin);
                     }
 
-                    case 8 -> {
-                        System.out.println("Nuevo título: ");
-                        nuevoTitulo = sc.next();
-                        System.out.println("Nuevo director: ");
-                        nuevoDirector = sc.next();
-                        System.out.println("Nuevo género: ");
-                        nuevoGenero = sc.next();
-                        System.out.println("Nueva duración (minutos): ");
-                        nuevaDuracion = sc.nextInt();
-                        System.out.println("Nueva clasificación: ");
-                        nuevaClasificacion = sc.next();
-                        System.out.println("Nuevo precio entrada: ");
-                        nuevoPrecio = sc.nextDouble();
-                        System.out.println("¿Está en cartelera? (true/false): ");
-                        enCartelera = sc.nextBoolean();
-
-                        peliculaDAO.modificarTituloPelicula(id, nuevoTitulo);
-                        peliculaDAO.modificarDirectorPelicula(id, nuevoDirector);
-                        peliculaDAO.modificarGeneroPelicula(id, nuevoGenero);
-                        peliculaDAO.modificarDuracionPelicula(id, nuevaDuracion);
-                        peliculaDAO.modificarClasificacionPelicula(id, nuevaClasificacion);
-                        peliculaDAO.modificarPrecioPelicula(id, nuevoPrecio);
-                        peliculaDAO.modificarEnCartelera(id, enCartelera);
-
-                    }
-
-                    case 9 -> menuPrincipal();
+                    case 8 -> menuPrincipal();
 
                     default -> System.out.println("Opción no válida");
                 }
                 exito = true;
-
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("¿Quieres volver a intentarlo? (si/no)");
@@ -205,6 +195,15 @@ public class PeliculaView {
                 }
             }
         } while (!exito);
+    }
+
+    public void listarPeliculas() {
+        PeliculaDAO peliculaDAO = new PeliculaDAO();
+        try {
+            peliculaDAO.mostrarPeliculas();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     public void borrarPelicula() {

@@ -16,7 +16,6 @@ public class ClienteDAO{
             statement.setString(4, cliente.getEmail());
             statement.executeUpdate();
 
-            //Para el ID del auto-increment
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
                 int idGenerado = generatedKeys.getInt(1);
@@ -83,6 +82,21 @@ public class ClienteDAO{
             e.printStackTrace();
         }
         return cliente;
+    }
+
+    public boolean existeSocio(String id) {
+        try (Connection conn = ConexionDB.getConnection()) {
+            String sql = "SELECT COUNT(*) FROM clientes WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true; 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     
 }

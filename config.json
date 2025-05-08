@@ -1,0 +1,151 @@
+{"cine": {
+    "diaEspectador": "Miercoles",
+    "direccion": "Calle Santa Monica 89, Sevilla",
+    "horarioCierre": "12:00",
+    "mapa_cine": {
+        "sala_emergencia": "Pasillo izquierdo",
+        "baños": "Pasillo derecho",
+        "zona_discapacitados": [
+            "Sala 1",
+            "Sala 3"
+        ],
+        "ubicacion_bar": "Planta baja"
+    },
+    "PrecioEntradaNormal": 8,
+    "textosPublicitarios": {
+        "bienvenida": "¡Bienvenidos a CineMax!",
+        "redes_sociales": "@CineMax_Oficial",
+        "mensaje_pantalla": "Próximamente: Spider-Man 6"
+    },
+    "limpieza": {
+        "horario_limpieza_profunda": "15:00",
+        "frecuencia_salas": 120,
+        "productos_utilizados": [
+            "desinfectante",
+            "limpiavidrios"
+        ]
+    },
+    "alianzas": [{
+        "descuento": "10% mostrando ticket de cine",
+        "validez": "2025-12-31",
+        "empresa": "Pizzería Napolitana"
+    }],
+    "diasAperturaSemanal": [
+        "Lunes",
+        "Jueves",
+        "Viernes",
+        "Sabado",
+        "Domingo"
+    ],
+    "promociones": [
+        {
+            "descripcion": "Compra una entrada y lleva otra gratis los martes",
+            "productos_aplicables": ["entrada_normal"],
+            "dias_validos": ["Martes"],
+            "descuento": 50,
+            "nombre": "2x1 en Jueves"
+        },
+        {
+            "descripcion": "4 entradas + 2 palomitas grandes + 2 refrescos",
+            "precio_promocion": 30,
+            "nombre": "Combo Familiar",
+            "valido_hasta": "2025-12-31"
+        }
+    ],
+    "nombre": "CineMax",
+    "diasCierreSemanal": [
+        "Martes",
+        "Miercoles"
+    ],
+    "PrecioDiaEspectador": 5,
+    "politicas": {
+        "edad_minima_no_acompanado": 12,
+        "normas": [
+            "No grabar la película",
+            "Silenciar móviles",
+            "No ingresar comida externa"
+        ],
+        "devoluciones": "Se aceptan devoluciones hasta 1 hora antes de la función"
+    },
+    "idiomas": {
+        "subtitulos_automaticos": false,
+        "disponibles": [
+            "español",
+            "inglés",
+            "francés"
+        ],
+        "idioma_predeterminado": "español"
+    },
+    "temporadas": [
+        {
+            "peliculas_especiales": [
+                "Scream 7",
+                "The Conjuring 4",
+                "Halloween Ends"
+            ],
+            "fecha_inicio": "2025-10-25",
+            "decoracion": "calabazas",
+            "fecha_fin": "2025-11-01",
+            "nombre": "Halloween"
+        },
+        {
+            "peliculas_especiales": [
+                "Love Actually",
+                "The Holiday",
+                "Elf"
+            ],
+            "fecha_inicio": "2025-12-20",
+            "decoracion": "arbol de navidad",
+            "fecha_fin": "2026-01-06",
+            "nombre": "Navidad"
+        },
+        {
+            "peliculas_especiales": [
+                "Jaws",
+                "Guardians of the Galaxy Vol. 3",
+                "The Fast and the Furious"
+            ],
+            "fecha_inicio": "2026-06-21",
+            "decoracion": "palmeras",
+            "fecha_fin": "2026-09-22",
+            "nombre": "Verano"
+        },
+        {
+            "peliculas_especiales": [
+                "Titanic",
+                "The Notebook",
+                "Crazy Rich Asians"
+            ],
+            "fecha_inicio": "2026-02-10",
+            "decoracion": "corazones",
+            "fecha_fin": "2026-02-16",
+            "nombre": "San Valentín"
+        },
+        {
+            "peliculas_especiales": [
+                "The Ten Commandments",
+                "Ben-Hur",
+                "Passion of the Christ"
+            ],
+            "fecha_inicio": "2026-03-29",
+            "decoracion": "flores",
+            "fecha_fin": "2026-04-04",
+            "nombre": "Semana Santa"
+        }
+    ],
+    "IVA": 21,
+    "horarios_automaticos": {
+        "horario_primer_funcion": "10:00",
+        "horario_ultima_funcion": "22:30",
+        "intervalo_entre_funciones": 30,
+        "duracion_publicidad_previa": 15
+    },
+    "diasCierreFestivo": [
+        "2025-12-25",
+        "2025-12-31",
+        "2026-01-01"
+    ],
+    "horarioApertura": "10:00",
+    "moneda": "EUR",
+    "telefono": "+34 912 345 678"
+}}

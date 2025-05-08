@@ -1,8 +1,7 @@
 package view;
 
-import java.lang.reflect.Array;
-import java.util.Scanner;
 import dao.ProveedorDAO;
+import java.util.Scanner;
 import model.Proveedor;
 
 public class ProveedorView {
@@ -78,7 +77,7 @@ public class ProveedorView {
         sc.nextLine();
 
         ProveedorDAO proveedorDAO = new ProveedorDAO();
-        if(proveedorDAO.eliminarProveedor(id)){
+        if(proveedorDAO.borrarProveedor(id)){
             System.out.println("Proveedor eliminado corretamente");
         }else{
             System.out.println("Proveedor no encontrado");
@@ -88,7 +87,7 @@ public class ProveedorView {
     public void modificarProveedor(){
 
         int id;
-        boolean pasar;
+        boolean pasar = true;
 
         do{
             try{
@@ -97,7 +96,7 @@ public class ProveedorView {
                 sc.nextLine();
 
                 ProveedorDAO proveedorDAO = new ProveedorDAO();
-                Proveedor proveedor = proveedorDAO.proveedorPorID(id);
+                Proveedor proveedor = proveedorDAO.provedorPorId(id);
 
                 if(proveedor != null){
                     menuModificacion(proveedor);
@@ -159,7 +158,7 @@ public class ProveedorView {
     public void listarProveedor(){
         System.out.println("Listado de proveedores");
         ProveedorDAO proveedorDAO = new ProveedorDAO();
-        for(Proveedor proveedor : proveedorDAO.obtenerProveedor()){
+        for(Proveedor proveedor : proveedorDAO.listarProveedor()){
             System.out.println(proveedor);
         }
     }
@@ -169,7 +168,7 @@ public class ProveedorView {
         int id = sc.nextInt();
         sc.nextLine();
         ProveedorDAO proveedorDAO = new ProveedorDAO();
-        Proveedor proveedor = proveedorDAO.proveedorPorID(id);
+        Proveedor proveedor = proveedorDAO.provedorPorId(id);
 
         if(proveedor != null){
             System.out.println(proveedor);

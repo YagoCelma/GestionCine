@@ -16,7 +16,7 @@ public class EmpleadoView {
     public void gestionEmpleados(){
         int respuesta;
         do{
-            System.out.println("\n Sistema de gestión de empleados");
+            System.out.println("\n Menu de empleados");
             System.out.println("1. Agregar empleado");
             System.out.println("2. Eliminar empleado");
             System.out.println("3. Mostrar empleados");
@@ -61,12 +61,12 @@ public class EmpleadoView {
         
         Empleado empleado = new Empleado(nombre, apellido, telefono, email, puesto, salario, fechaContratacion);
         EmpleadoDao empleadoDao = new EmpleadoDao();
-        empleadoDao.añadirEmpleado(empleadoDao);
+        empleadoDao.añadirEmpleado(empleado);
         System.out.println("Empleado añadido con ID: " + empleado.getId());
     }
 
     public void eliminarEmpleado(){
-        System.out.println("Introduzca el Id del empleado a eliminar: ");
+        System.out.println("Introduzca el ID del empleado a eliminar: ");
         int id = sc.nextInt();
         sc.nextLine();
         EmpleadoDao empleadoDao = new EmpleadoDao();
@@ -98,7 +98,7 @@ public class EmpleadoView {
     }
 
     public void actualizarEmpleado(){
-        System.out.println("Introduce el ID del epleado a actualizar");
+        System.out.println("Introduce el ID del empleado a actualizar");
         int id = sc.nextInt();
         sc.nextLine();
         EmpleadoDao empleadoDao = new EmpleadoDao();
@@ -137,10 +137,5 @@ public class EmpleadoView {
         } else {
             System.out.println("No se encontro ningun empleado con ese ID");
         }
-
-
-
     }
-
-
 }

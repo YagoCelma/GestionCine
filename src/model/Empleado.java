@@ -53,7 +53,7 @@ public class Empleado {
         ", telefono=" + telefono + '\'' +
         ", email=" + email + '\'' +
         ", puesto=" + puesto + '\'' +
-        ", salario=" +salario+
+        ", salario=" +salario+'\'' +
         ", fechaContratacion=" +fechaContratacion+
         "}";
     }
