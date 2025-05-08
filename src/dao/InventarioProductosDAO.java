@@ -1,15 +1,8 @@
 package dao;
 
-
-import java.beans.Statement;
 import java.util.ArrayList;
 import model.InventarioProductos;
-import java.net.ConnectException;
-import java.nio.channels.ClosedByInterruptException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.sql.*;
 
 
@@ -18,7 +11,7 @@ public class InventarioProductosDAO {
     public void crearProducto(InventarioProductos inventarioProductos){
         try(Connection conn = ConexionDB.getConnection()){
             String sql = " INSERT INTO inventario_Productos (nombre_producto, cantidad, cantidad_minima) VALUES(?,?,?)";
-            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, inventarioProductos.getNombre());
             statement.setInt(2, inventarioProductos.getCantidad());
             statement.setInt(3, inventarioProductos.getCantidadMinima());
