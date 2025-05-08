@@ -38,8 +38,11 @@ public class InventarioPeliculaView {
                 case 4 ->
                     listarInventario();
                     
-                case 5 ->
+                case 5 -> {
                     menuPrincipal();
+                    exito = false;
+                }
+                    
                 case 6 ->
                     System.exit(0);
                     
