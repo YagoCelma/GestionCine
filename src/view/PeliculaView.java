@@ -45,7 +45,7 @@ public class PeliculaView {
         return opcion;
     }
 
-    public Pelicula anadirPelicula() {
+    public void anadirPelicula() {
         String titulo = "";
         String director = "";
         String genero = "";
@@ -88,6 +88,10 @@ public class PeliculaView {
                 String fechaFinStr = sc.nextLine();
                 fechaFin = java.sql.Date.valueOf(fechaFinStr);
 
+                Pelicula pelicula = new Pelicula(titulo, director, genero, duracion, clasificacion, precioEntrada, fechaInicio, fechaFin);
+                PeliculaDAO peliculaDao = new PeliculaDAO();
+                peliculaDao.insertarPelicula(pelicula);
+
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("¿Quieres volver a intentarlo?");
@@ -97,12 +101,12 @@ public class PeliculaView {
                 if (respuesta.equals("si")) {
                     exito = true;
                 } else {
-                    return null;
+                    exito = false;
                 }
             }
         } while (exito);
         System.out.println("La pelicula se ha añadido correctamente");
-        return new Pelicula(titulo, director, genero, duracion, clasificacion, precioEntrada, fechaInicio, fechaFin);
+
     }
 
     public void modificarPelicula() {
@@ -135,6 +139,7 @@ public class PeliculaView {
                 System.out.println("8. Salir al menu principal");
 
                 int opcion = sc.nextInt();
+                sc.nextLine();
 
                 switch (opcion) {
                     case 1 -> {
@@ -222,6 +227,7 @@ public class PeliculaView {
             try {
                 System.out.println("ID de la película: ");
                 id = sc.nextInt();
+                sc.nextLine();
 
                 System.out.println("La película ");
                 peliculaDAO.mostrarPeliculaByID(id);
