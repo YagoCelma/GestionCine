@@ -1,8 +1,8 @@
 package view;
 
-import model.Sala;
 import dao.SalaDAO;
 import java.util.*;
+import model.Sala;
 
 public class SalaView {
     
@@ -12,12 +12,14 @@ public class SalaView {
 
         int opcion;
         do { 
+            System.out.println("             ");
             System.out.println("Menu de Salas");
             System.out.println("1. Añadir sala");
             System.out.println("2. Borrar sala");
             System.out.println("3. Modificar sala");
             System.out.println("4. Mostrar sala");
             System.out.println("5. Listar salas");
+            System.out.println("6. Salir");
             opcion = sc.nextInt();
             sc.nextLine();
 
@@ -27,6 +29,7 @@ public class SalaView {
                 case 3-> modificarSala();
                 case 4-> mostrarSala();
                 case 5-> listarSalas();
+                case 6-> System.out.println("Saliendo...");
                 default -> System.out.println("Opcion no valida, vuelva a intentarlo");
             }
         } while (opcion != 6);
