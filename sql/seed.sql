@@ -36,14 +36,6 @@ CREATE TABLE IF NOT EXISTS proveedor(
     email VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS inventario_peliculas (
-    id_inventario_peliculas INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_producto VARCHAR(50),
-    cantidad INT NOT NULL,
-    cantidad_minima INT NOT NULL,
-    id_proveedor INT NOT NULL,
-    FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
-);
 
 CREATE TABLE IF NOT EXISTS inventario_productos (
     id_inventario_producto INT AUTO_INCREMENT PRIMARY KEY,
@@ -87,7 +79,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
     id_articulo INT NOT NULL,
     cantidad INT NOT NULL,
     precio_total DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+    FOREIGN KEY (id_articulo) REFERENCES producto(id)
 );
 
 CREATE TABLE IF NOT EXISTS salas_peliculas( 

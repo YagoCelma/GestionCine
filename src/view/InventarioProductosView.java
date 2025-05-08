@@ -1,10 +1,8 @@
 package view;
 
-import dao.ClienteDAO;
 import dao.InventarioProductosDAO;
 import java.util.*;
 
-import model.Cliente;
 import model.InventarioProductos;
 
 
@@ -40,12 +38,12 @@ public class InventarioProductosView {
             System.out.println("Introduzca el nombre");
             String nombre = sc.nextLine();
             System.out.println("Introduzca la cantidad");
-            String cantidad = sc.nextLine();
+            int cantidad = sc.nextInt();
+            sc.nextLine();
             System.out.println("Introduzca la cantidad minima");
             int cantidad_minima = sc.nextInt();
             sc.nextLine();
            
-            String id = sc.nextLine();
 
             InventarioProductos inventarioProductos = new InventarioProductos(nombre, cantidad, cantidad_minima);
             InventarioProductosDAO inventarioProductosDAO = new InventarioProductosDAO();

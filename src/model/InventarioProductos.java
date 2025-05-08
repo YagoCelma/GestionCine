@@ -9,12 +9,11 @@ public class InventarioProductos {
     private int id_proveedor;
 
 
-    public void InventarioProducto(String nombre, int cantidad, int cantidad_minima, int id_proveedor){
+    public void InventarioProducto(String nombre, int cantidad, int cantidad_minima){
 
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.cantidad_minima = cantidad_minima;
-        this.id_proveedor = id_proveedor;
     }
 
     public InventarioProductos(){

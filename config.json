@@ -1,7 +1,9 @@
 {"cine": {
     "diaEspectador": "Miercoles",
     "direccion": "Calle Santa Monica 89, Sevilla",
-    "horarioCierre": "12:00",
+    "horarioApertura": "10:00",
+    "horarioCierre": "00:00",
+    "pausaEntrePeliculas": 45,
     "mapa_cine": {
         "sala_emergencia": "Pasillo izquierdo",
         "baños": "Pasillo derecho",
@@ -145,7 +147,6 @@
         "2025-12-31",
         "2026-01-01"
     ],
-    "horarioApertura": "10:00",
     "moneda": "EUR",
     "telefono": "+34 912 345 678"
 }}
