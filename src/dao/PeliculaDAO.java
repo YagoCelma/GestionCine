@@ -43,7 +43,7 @@ public class PeliculaDAO {
     public void modificarTituloPelicula(int id, String nuevoTitulo) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
 
-        String query = "UPDATE peliculas SET titulo = ? WHERE id=" + id;
+        String query = "UPDATE peliculas SET titulo = ? WHERE id_pelicula=" + id;
 
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
 
@@ -59,7 +59,7 @@ public class PeliculaDAO {
 
     public void modificarDirectorPelicula(int id, String nuevoDirector) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
-        String query = "UPDATE peliculas SET director = ? WHERE id=" + id;
+        String query = "UPDATE peliculas SET director = ? WHERE id_pelicula=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setString(1, nuevoDirector);
             stmt.executeUpdate();
@@ -71,7 +71,7 @@ public class PeliculaDAO {
 
     public void modificarGeneroPelicula(int id, String nuevoGenero) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
-        String query = "UPDATE peliculas SET genero = ? WHERE id=" + id;
+        String query = "UPDATE peliculas SET genero = ? WHERE id_pelicula=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setString(1, nuevoGenero);
             stmt.executeUpdate();
@@ -83,7 +83,7 @@ public class PeliculaDAO {
 
     public void modificarDuracionPelicula(int id, int nuevaDuracion) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
-        String query = "UPDATE peliculas SET duracion = ? WHERE id=" + id;
+        String query = "UPDATE peliculas SET duracion = ? WHERE id_pelicula=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setInt(1, nuevaDuracion);
             stmt.executeUpdate();
@@ -95,7 +95,7 @@ public class PeliculaDAO {
 
     public void modificarClasificacionPelicula(int id, String nuevaClasificacion) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
-        String query = "UPDATE peliculas SET clasificacion = ? WHERE id=" + id;
+        String query = "UPDATE peliculas SET clasificacion = ? WHERE id_pelicula=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setString(1, nuevaClasificacion);
             stmt.executeUpdate();
@@ -107,7 +107,7 @@ public class PeliculaDAO {
 
     public void modificarPrecioPelicula(int id, double nuevoPrecio) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
-        String query = "UPDATE peliculas SET precio = ? WHERE id=" + id;
+        String query = "UPDATE peliculas SET precio = ? WHERE id_pelicula=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setDouble(1, nuevoPrecio);
             stmt.executeUpdate();
@@ -119,7 +119,7 @@ public class PeliculaDAO {
 
     public void modificarFechasPelicula(int id, Date nuevaFechaInicio, Date nuevaFechaFin) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
-        String query = "UPDATE peliculas SET fecha_inicio = ?, fecha_fin = ? WHERE id=" + id;
+        String query = "UPDATE peliculas SET fecha_inicio = ?, fecha_fin = ? WHERE id_pelicula=" + id;
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setDate(1, new java.sql.Date(nuevaFechaInicio.getTime()));
             stmt.setDate(2, new java.sql.Date(nuevaFechaFin.getTime()));
@@ -139,7 +139,7 @@ public class PeliculaDAO {
                 ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                System.out.println("ID: " + rs.getString("id"));
+                System.out.println("ID: " + rs.getString("id_pelicula"));
                 System.out.println("Titulo: " + rs.getString("titulo"));
                 System.out.println("Director: " + rs.getString("director"));
                 System.out.println("Género: " + rs.getString("genero"));
@@ -160,12 +160,12 @@ public class PeliculaDAO {
 
     public Pelicula mostrarPeliculaByID(int id) throws SQLException {
         Connection conexion = dao.ConexionDB.getConnection();
-        String query = "SELECT * FROM peliculas WHERE id=" + id;
+        String query = "SELECT * FROM peliculas WHERE id_pelicula=" + id;
         try (Statement stmt = conexion.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
             if (rs.next()) {
                 Pelicula pelicula = new Pelicula();
-                pelicula.setId(rs.getInt("id"));
+                pelicula.setId(rs.getInt("id_pelicula"));
                 pelicula.setTitulo(rs.getString("titulo"));
                 pelicula.setDirector(rs.getString("director"));
                 pelicula.setGenero(rs.getString("genero"));
@@ -192,7 +192,7 @@ public class PeliculaDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Pelicula pelicula = new Pelicula();
-                    pelicula.setId(rs.getInt("id"));
+                    pelicula.setId(rs.getInt("id_pelicula"));
                     pelicula.setTitulo(rs.getString("titulo"));
                     pelicula.setDirector(rs.getString("director"));
                     pelicula.setGenero(rs.getString("genero"));
@@ -215,7 +215,7 @@ public class PeliculaDAO {
 
         Connection conexion = dao.ConexionDB.getConnection();
 
-        String query = "DELETE FROM peliculas WHERE id = ?";
+        String query = "DELETE FROM peliculas WHERE id_pelicula = ?";
 
         try (PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setInt(1, id);
