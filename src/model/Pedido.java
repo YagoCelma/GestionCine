@@ -51,4 +51,16 @@ public class Pedido {
 
     public double getPrecioTotal() { return precioTotal; } 
     public void setPrecioTotal(double precioTotal) { this.precioTotal = precioTotal; }
+
+        @Override
+    public String toString() {
+        return "Pedido{" +
+               "id=" + id +
+               ", idProveedor=" + idProveedor +
+               ", fechaPedido=" + fechaPedido +
+               ", idArticulo=" + idArticulo +
+               ", cantidad=" + cantidad +
+               ", precioTotal=" + precioTotal +
+               '}';
+    }
 }

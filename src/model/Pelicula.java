@@ -99,4 +99,19 @@ public class Pelicula {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
+
+     @Override
+    public String toString() {
+        return "Pelicula{" +
+               "id=" + id +
+               ", titulo='" + titulo + '\'' +
+               ", director='" + director + '\'' +
+               ", genero='" + genero + '\'' +
+               ", duracion=" + duracion +
+               ", clasificacion='" + clasificacion + '\'' +
+               ", precioEntrada=" + precioEntrada +
+               ", fechaInicio=" + fechaInicio +
+               ", fechaFin=" + fechaFin +
+               '}';
+    }
 }

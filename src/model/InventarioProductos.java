@@ -13,11 +13,12 @@ public class InventarioProductos {
 
     }
 
-    public InventarioProductos(String nombre, int cantidad, int cantidad_minima){
+    public InventarioProductos(String nombre, int cantidad, int cantidad_minima, int id_proveedor){
 
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.cantidad_minima = cantidad_minima;
+        this.id_proveedor = id_proveedor;
     }
 
 
@@ -40,5 +41,16 @@ public class InventarioProductos {
     public int getIdProveedor() {return id_proveedor;}
 
     public void setIdProveedor(int id_proveedor) {this.id_proveedor = id_proveedor;}
+
+        @Override
+    public String toString() {
+        return "InventarioProductos{" +
+               "id=" + id_inventario_productos +
+               ", nombre='" + nombre + '\'' +
+               ", cantidad=" + cantidad +
+               ", cantidadMinima=" + cantidad_minima +
+               ", idProveedor=" + id_proveedor +
+               '}';
+    }
 
 }

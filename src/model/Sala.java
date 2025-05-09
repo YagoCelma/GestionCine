@@ -23,4 +23,13 @@ public class Sala {
 
     public int getNumeroColumnas() {return numeroColumnas;}
     public void setNumeroColumnas(int numeroColumnas) {this.numeroColumnas = numeroColumnas;}
+
+        @Override
+    public String toString() {
+        return "Sala{" +
+               "id=" + id +
+               ", numeroFilas=" + numeroFilas +
+               ", numeroColumnas=" + numeroColumnas +
+               '}';
+    }
 }

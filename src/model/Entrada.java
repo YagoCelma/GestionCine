@@ -41,5 +41,15 @@ public class Entrada {
     public void setPrecio(double precio){this.precio = precio;}
     public void setDniSocio(String dniSocio) { this.dniSocio = dniSocio; }
 
+        @Override
+    public String toString() {
+        return "Entrada{" +
+               "id=" + id +
+               ", idSalaPelicula=" + idSalaPelicula +
+               ", asiento=" + asiento +
+               ", precio=" + precio +
+               ", dniSocio='" + dniSocio + '\'' +
+               '}';
+    }
     
 }

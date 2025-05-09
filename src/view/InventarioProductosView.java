@@ -2,7 +2,6 @@ package view;
 
 import dao.InventarioProductosDAO;
 import java.util.*;
-
 import model.InventarioProductos;
 
 
@@ -13,7 +12,7 @@ public class InventarioProductosView {
     public void menuInventarioproductos(){
         int opcion;
         do { 
-            System.out.println("Bienbenido al menu de Productos");
+            System.out.println("Bienvenido al menu de Productos");
             System.out.println("1. Añadir producto");
             System.out.println("2. Borrar producto");
             System.out.println("3. Modificar producto");
@@ -44,16 +43,19 @@ public class InventarioProductosView {
             System.out.println("Introduzca la cantidad minima");
             int cantidad_minima = sc.nextInt();
             sc.nextLine();
-           
 
-            InventarioProductos inventarioProductos = new InventarioProductos(nombre, cantidad, cantidad_minima);
+            System.out.println("Introduzca la ID del proveedor");
+            int id_proveedor = sc.nextInt();
+            sc.nextLine();
+
+            InventarioProductos inventarioProductos = new InventarioProductos(nombre, cantidad, cantidad_minima, id_proveedor);
             InventarioProductosDAO inventarioProductosDAO = new InventarioProductosDAO();
             inventarioProductosDAO.crearProducto(inventarioProductos);
             System.out.println("Producto añadido correctamente con  ID" + inventarioProductos.getId());
      }
     
     private void listarProductos(){
-         System.out.println("Lista de Clientes:");
+         System.out.println("Lista de Productos:");
         InventarioProductosDAO inventarioProductosDAO = new InventarioProductosDAO();
         for (InventarioProductos inventarioProductos : inventarioProductosDAO.obtenerInventarioProductos()) {
             System.out.println(inventarioProductos);
@@ -83,7 +85,7 @@ public class InventarioProductosView {
         if(inventarioProductos != null){
             System.out.println(inventarioProductos);
         }else{
-            System.out.println("No se ha encontrado el cliente");
+            System.out.println("No se ha encontrado el producto");
         }
     }
 

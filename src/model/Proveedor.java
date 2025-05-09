@@ -34,4 +34,15 @@ public class Proveedor{
 
     public String getEmail(){return email;}
     public void setEmail(String email) {this.email = email;}
+
+        @Override
+    public String toString() {
+        return "Proveedor{" +
+               "id=" + id +
+               ", nombre='" + nombre + '\'' +
+               ", tipo='" + tipo + '\'' +
+               ", telefono=" + telefono +
+               ", email='" + email + '\'' +
+               '}';
+    }
 }

@@ -13,9 +13,8 @@ CREATE TABLE IF NOT EXISTS clientes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
+    dni VARCHAR(15) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    telefono INT(15) NOT NULL,
     email VARCHAR(100) NOT NULL
 );
 

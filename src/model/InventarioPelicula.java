@@ -46,4 +46,15 @@ public class InventarioPelicula {
     public void setCopiasDisponibles(int copiasDisponibles) {
         this.copiasDisponibles = copiasDisponibles;
     }
+
+        @Override
+    public String toString() {
+        return "InventarioPelicula{" +
+               "id=" + id +
+               ", pelicula=" + pelicula +
+               ", copias=" + copias +
+               ", copiasDisponibles=" + copiasDisponibles +
+               '}';
+    }
+
 } 
