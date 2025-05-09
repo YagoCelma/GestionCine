@@ -1,9 +1,8 @@
 package view;
-import dao.ClienteDAO;
 import dao.EntradaDAO;
+import dao.Salas_peliculasDao;
 import java.util.*;
 import model.Entrada;
-import dao.Salas_peliculasDao;
 import model.Salas_peliculas;
 
 
@@ -41,7 +40,7 @@ public class EntradasView {
     public void venderEntrada(){
         Salas_peliculasDao sp = new Salas_peliculasDao();
         System.out.println("---PELICULAS DISPONIBLES---");
-        sp.mostrar(); 
+        System.out.println(sp.mostrar()); 
 
         System.out.println("ID de la sala pelicula");
         int idSalaPelicula = sc.nextInt();

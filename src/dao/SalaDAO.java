@@ -57,7 +57,7 @@ public class SalaDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return null;
+        return sala;
     }
 
     public ArrayList<Sala> obtenerSala(){
