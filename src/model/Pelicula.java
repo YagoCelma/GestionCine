@@ -7,8 +7,8 @@ public class Pelicula {
     String titulo;
     String director;
     String genero;
-    int duracion; // minutos
-    String clasificacion; // público apto / edad recomendada
+    int duracion;
+    String clasificacion;
     double precioEntrada;
     Date fechaInicio;
     Date fechaFin;

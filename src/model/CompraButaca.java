@@ -22,7 +22,6 @@ public class CompraButaca {
         this.estado = "PENDIENTE";
     }
 
-    // Getters y Setters
     public int getId() {
         return id;
     }

@@ -1,12 +1,12 @@
 package view;
 
-import dao.ClienteDAO;
 import dao.PedidoDAO;
 import java.sql.Time;
 import java.util.Scanner;
 
-import model.Cliente;
 import model.Pedido;
+import model.Producto;
+import dao.ProductoDAO;
 
 public class PedidoView {
 
@@ -57,9 +57,11 @@ public class PedidoView {
         int cantidad = sc.nextInt();
         sc.nextLine();
 
-        System.out.println("Indique el precio total del pedido");
-        double precioTotal = sc.nextDouble();  //revisar, calcular con multiplicaicon y get
-        sc.nextLine();
+        ProductoDAO productoDAO = new ProductoDAO();
+        Producto producto = productoDAO.productoPorID(idArticulo);
+        
+        double precioTotal = producto.getPrecio() * cantidad;
+
 
         Pedido pedido = new Pedido(idProveedor, fechaPedido, idArticulo, cantidad, precioTotal);
         PedidoDAO pedidoDAO = new PedidoDAO();
