@@ -7,10 +7,10 @@ import model.Entrada;
 public class EntradaDAO {
 
     public void añadirEntrada(Entrada entrada) {
-        String sql = "INSERT INTO entradas (id_sala_pelicula, precio, asiento) VALUES (?, ?, ?)";
         try (Connection conn = ConexionDB.getConnection()){
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1,entrada.getidSalaPelicula());//Cambiado
+            String sql = "INSERT INTO entradas (id_sala_pelicula, precio, asiento) VALUES (?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1,entrada.getIdSalaPelicula());//Cambiado
             statement.setDouble(2, entrada.getPrecio());
             statement.setInt(3, entrada.getAsiento());
             
@@ -94,6 +94,30 @@ public class EntradaDAO {
         }
         return entrada;
     }
+
+    public ArrayList<Entrada> listarEntradasPorSala(int idSalaPelicula) {
+    ArrayList<Entrada> entradas = new ArrayList<>();
+    String sql = "SELECT * FROM entradas WHERE id_sala_pelicula = ?";
+    try (Connection conn = ConexionDB.getConnection();
+         PreparedStatement statement = conn.prepareStatement(sql)) {
+
+        statement.setInt(1, idSalaPelicula);
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            Entrada entrada = new Entrada();
+            entrada.setId(rs.getInt("id_entrada"));
+            entrada.setIdSalaPelicula(rs.getInt("id_sala_pelicula"));
+            entrada.setPrecio(rs.getDouble("precio"));
+            entrada.setAsiento(rs.getInt("asiento"));
+            entradas.add(entrada);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return entradas;
+}
+
 
     
 }

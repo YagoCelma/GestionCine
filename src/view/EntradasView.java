@@ -37,68 +37,74 @@ public class EntradasView {
         }while(opcion != 6);
     }
     
-    public void venderEntrada(){
-        Salas_peliculasDao sp = new Salas_peliculasDao();
-        System.out.println("---PELICULAS DISPONIBLES---");
-        System.out.println(sp.mostrar()); 
+   public void venderEntrada() {
+    Salas_peliculasDao sp = new Salas_peliculasDao();
+    System.out.println("---PELICULAS DISPONIBLES---");
+    System.out.println(sp.mostrar());
 
-        System.out.println("ID de la sala pelicula");
-        int idSalaPelicula = sc.nextInt();
-        sc.nextLine();
+    System.out.println("ID de la sala pelicula");
+    int idSalaPelicula = sc.nextInt();
+    sc.nextLine();
 
-        Salas_peliculas salaPelicula = sp.salaPeliculaPorID(idSalaPelicula);
-        double precioBase = sp.obtenerPrecioBase(idSalaPelicula); 
-        if(salaPelicula == null) {
-            System.out.println("Error: ID de sala no encontrado");
-            return;
-        }
-
-        System.out.println("\n--- MAPA DE ASIENTOS ---");
-        salaPelicula.mostrarSala();
-
-        System.out.print("\nIngrese fila del asiento: ");
-        int fila = sc.nextInt();
-        System.out.print("Ingrese columna del asiento: ");
-        int columna = sc.nextInt();
-        sc.nextLine();
-
-        boolean esDiscapacitado = false;
-        if(salaPelicula.getAsientos()[fila][columna] == 'D') {
-            System.out.print("¿Es para persona con discapacidad? (s/n): ");
-            esDiscapacitado = sc.nextLine().equalsIgnoreCase("s");
-        }
-        
-        if(!salaPelicula.reservarAsiento(fila, columna, esDiscapacitado)) {
-            System.out.println("No se pudo reservar el asiento. Puede que ya esté ocupado.");
-            return;
-        }
-        
-        int numeroAsiento = fila * 100 + columna;
-
-        System.out.println("\nTIPOS DE DESCUENTO:");
-        System.out.println("0. Ninguno (precio completo)");
-        System.out.println("1. Socio (20% desc.)");
-        System.out.println("2. Niño (40% desc.)");
-        System.out.println("3. Jubilado (50% desc.)");
-        System.out.print("Seleccione opción: ");
-        int tipoDescuento = sc.nextInt();
-        sc.nextLine();
-
-        double precioFinal = calcularPrecioDescuento(precioBase, tipoDescuento);
-
-        Entrada entrada = new Entrada(numeroAsiento, idSalaPelicula, precioFinal);
-
-        if(tipoDescuento == 1){
-            System.out.println("Introduzca DNI del socio:");
-            entrada.setDniSocio(sc.nextLine());
-        }
-      
-        EntradaDAO entradaDAO = new EntradaDAO();
-        entradaDAO.añadirEntrada(entrada);
-        System.out.println("Entrada creada. Precio final:" + precioFinal);
-
-        
+    Salas_peliculas salaPelicula = sp.salaPeliculaPorID(idSalaPelicula);
+    EntradaDAO entradaDAO = new EntradaDAO();
+    ArrayList<Entrada> entradasReservadas = entradaDAO.listarEntradasPorSala(idSalaPelicula);
+    salaPelicula.aplicarReservas(entradasReservadas);
+    if (salaPelicula == null) {
+        System.out.println("Error: ID de sala no encontrado");
+        return;
     }
+
+    double precioBase = salaPelicula.getPrecioBase();
+
+    System.out.println("\n--- MAPA DE ASIENTOS ---");
+    salaPelicula.mostrarSala();
+
+    System.out.print("\nIngrese fila del asiento: ");
+    int fila = sc.nextInt();
+    System.out.print("Ingrese columna del asiento: ");
+    int columna = sc.nextInt();
+    sc.nextLine();
+
+    boolean esDiscapacitado = false;
+    if (salaPelicula.getAsientos()[fila][columna] == 'D') {
+        System.out.print("¿Es para persona con discapacidad? (s/n): ");
+        esDiscapacitado = sc.nextLine().equalsIgnoreCase("s");
+    }
+
+    if (!salaPelicula.reservarAsiento(fila, columna, esDiscapacitado)) {
+        System.out.println("No se pudo reservar el asiento. Puede que ya esté ocupado.");
+        return;
+    }
+
+    int numeroAsiento = fila * 100 + columna;
+
+    System.out.println("\nTIPOS DE DESCUENTO:");
+    System.out.println("0. Ninguno (precio completo)");
+    System.out.println("1. Socio (20% desc.)");
+    System.out.println("2. Niño (40% desc.)");
+    System.out.println("3. Jubilado (50% desc.)");
+    System.out.print("Seleccione opción: ");
+    int tipoDescuento = sc.nextInt();
+    sc.nextLine();
+
+    double precioFinal = calcularPrecioDescuento(precioBase, tipoDescuento);
+
+    Entrada entrada = new Entrada();
+    entrada.setAsiento(numeroAsiento);
+    entrada.setIdSalaPelicula(salaPelicula.getId());
+    entrada.setPrecio(precioFinal);
+
+    if (tipoDescuento == 1) {
+        System.out.println("Introduzca DNI del socio:");
+        entrada.setDniSocio(sc.nextLine());
+    }
+
+    entradaDAO.añadirEntrada(entrada);
+
+    System.out.println("Entrada creada. Precio final: " + precioFinal);
+}
+
     public void borrarEntrada(){
         System.out.println("Introduzca el ID de la entrada a borrar");
         int id = sc.nextInt();

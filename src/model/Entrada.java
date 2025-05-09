@@ -8,7 +8,9 @@ public class Entrada {
     private double precio;
     private String dniSocio; 
 
-    
+    public Entrada(){
+
+    }
     public Entrada(int idSalaPelicula, int asiento, double precio) {
         
         this.idSalaPelicula = idSalaPelicula;
@@ -28,10 +30,10 @@ public class Entrada {
         this.asiento = asiento;
     }
 
-    public int getidSalaPelicula() {
+    public int getIdSalaPelicula() {
         return idSalaPelicula;
     }
-    public void setidSalaPelicula(int idSalaPelicula) {
+    public void setIdSalaPelicula(int idSalaPelicula) {
         this.idSalaPelicula = idSalaPelicula;
     }
 

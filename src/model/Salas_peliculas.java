@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Salas_peliculas {
 
@@ -95,23 +96,39 @@ public class Salas_peliculas {
         return matriz;
     }
 
-    public void mostrarSala() {
-        System.out.println("\n       PANTALLA / ESCENARIO\n");
+public void mostrarSala() {
+    final String ANSI_RESET = "\u001B[0m";
+    final String ANSI_GREEN = "\u001B[32m";
+    final String ANSI_RED = "\u001B[31m";
 
-        for (int i = 0; i < asientos.length; i++) {
-            System.out.printf("%2d ", i);
-            for (int j = 0; j < asientos[i].length; j++) {
-                System.out.print(asientos[i][j] + " ");
+    System.out.println("\n       PANTALLA / ESCENARIO\n");
+
+    for (int i = 0; i < asientos.length; i++) {
+        System.out.printf("%2d ", i);
+        for (int j = 0; j < asientos[i].length; j++) {
+            char asiento = asientos[i][j];
+            switch (asiento) {
+                case '█': // Disponible
+                case 'D':
+                    System.out.print(ANSI_GREEN + asiento + " " + ANSI_RESET);
+                    break;
+                case 'X': // Ocupado
+                case '@':
+                    System.out.print(ANSI_RED + asiento + " " + ANSI_RESET);
+                    break;
+                default:
+                    System.out.print(asiento + " ");
             }
-            System.out.println(" " + i);
         }
-
-        System.out.print("   ");
-        for (int j = 0; j < asientos[0].length; j++) {
-            System.out.print((j < 10 ? " " : "") + j % 10 + " ");
-        }
-        System.out.println("\n");
+        System.out.println(" " + i);
     }
+
+    System.out.print("   ");
+    for (int j = 0; j < asientos[0].length; j++) {
+        System.out.print((j < 10 ? " " : "") + j % 10 + " ");
+    }
+    System.out.println("\n");
+}
 
     public boolean reservarAsiento(int fila, int columna, boolean esDiscapacitado) {
         if (fila < 0 || fila >= asientos.length || columna < 0 || columna >= asientos[fila].length) {
@@ -138,4 +155,17 @@ public class Salas_peliculas {
         System.out.println("No disponible.");
         return false;
     }
+
+    public void aplicarReservas(ArrayList<Entrada> entradas) {
+    for (Entrada e : entradas) {
+        int fila = e.getAsiento() / 100;
+        int columna = e.getAsiento() % 100;
+        if (fila >= 0 && fila < asientos.length && columna >= 0 && columna < asientos[0].length) {
+            if (asientos[fila][columna] == '█') {
+                asientos[fila][columna] = 'X';
+            }
+        }
+    }
+}
+
 }
