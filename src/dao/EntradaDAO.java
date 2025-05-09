@@ -10,8 +10,9 @@ public class EntradaDAO {
         String sql = "INSERT INTO entradas (id_sala_pelicula, precio, asiento) VALUES (?, ?, ?)";
         try (Connection conn = ConexionDB.getConnection()){
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setDouble(1, entrada.getPrecio());
-            statement.setInt(2, entrada.getAsiento());
+            statement.setInt(1,entrada.getidSalaPelicula());//Cambiado
+            statement.setDouble(2, entrada.getPrecio());
+            statement.setInt(3, entrada.getAsiento());
             
             statement.executeUpdate();
 
