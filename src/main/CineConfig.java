@@ -2,7 +2,7 @@ package main;
  
 import org.json.JSONArray;
 import org.json.JSONObject;
-import utils.ConfigLoader;
+import main.ConfigLoader;
  
 import java.util.ArrayList;
 import java.util.List;

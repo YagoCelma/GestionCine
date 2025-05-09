@@ -41,14 +41,14 @@ public class EntradasView {
     public void venderEntrada(){
         Salas_peliculasDao sp = new Salas_peliculasDao();
         System.out.println("---PELICULAS DISPONIBLES---");
-        sp.mostrar(); //En el dao de salaPeliculas listar las disponibles con su id
+        sp.mostrar(); 
 
         System.out.println("ID de la sala pelicula");
         int idSalaPelicula = sc.nextInt();
         sc.nextLine();
 
         Salas_peliculas salaPelicula = sp.salaPeliculaPorID(idSalaPelicula);
-        double precioBase = sp.obtenerPrecioBase(idSalaPelicula); //Falta aun de implementar
+        double precioBase = sp.obtenerPrecioBase(idSalaPelicula); 
         if(salaPelicula == null) {
             System.out.println("Error: ID de sala no encontrado");
             return;
@@ -69,13 +69,11 @@ public class EntradasView {
             esDiscapacitado = sc.nextLine().equalsIgnoreCase("s");
         }
         
-        // Intentar reservar el asiento
         if(!salaPelicula.reservarAsiento(fila, columna, esDiscapacitado)) {
             System.out.println("No se pudo reservar el asiento. Puede que ya esté ocupado.");
             return;
         }
         
-        // Calcular número de asiento único
         int numeroAsiento = fila * 100 + columna;
 
         System.out.println("\nTIPOS DE DESCUENTO:");

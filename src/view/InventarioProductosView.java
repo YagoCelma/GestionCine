@@ -30,9 +30,10 @@ public class InventarioProductosView {
                 case 3-> modificarProducto();
                 case 4-> listarProductos();
                 case 5-> buscarProductoID();
+                case 6-> System.out.println("Saliendo...");
                 default -> System.out.println("Seleccione una opcion que sea valida");
             }
-         }while (opcion != 6);   
+         }while (opcion != 6);
      }
     public void añadirProducto(){
             System.out.println("Introduzca el nombre");
@@ -76,7 +77,9 @@ public class InventarioProductosView {
         int id_inventario_productos = sc.nextInt();
         sc.nextLine();
         InventarioProductosDAO inventarioProductosDAO = new InventarioProductosDAO();
-        InventarioProductos inventarioProductos = InventarioProductosDAO.ProductosPorID(id_inventario_productos);
+        InventarioProductos inventarioProductos = inventarioProductosDAO.ProductosPorID(id_inventario_productos);
+
+        
         if(inventarioProductos != null){
             System.out.println(inventarioProductos);
         }else{

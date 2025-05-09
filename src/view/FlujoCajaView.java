@@ -26,7 +26,7 @@ public class FlujoCajaView {
             System.out.println("0. Volver");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
-            scanner.nextLine(); // limpiar buffer
+            scanner.nextLine(); 
  
             switch (opcion) {
                 case 1 -> registrarMovimiento("INGRESO");
@@ -62,7 +62,7 @@ public class FlujoCajaView {
         System.out.print("Cantidad (€): ");
         movimiento.setCantidad(scanner.nextDouble());
  
-        scanner.nextLine(); // limpiar buffer
+        scanner.nextLine();
         System.out.print("Categoría (ej: SERVICIO, NOMINA, COMPRA, OTRO): ");
         movimiento.setCategoria(scanner.nextLine());
  

@@ -1,16 +1,16 @@
 package dao;
 
 import model.CompraButaca;
-import util.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import dao.ConexionDB;
 
 public class CompraButacaDAO {
     private Connection conexion;
 
-    public CompraButacaDAO() {
-        this.conexion = Conexion.getConnection();
+    public CompraButacaDAO(Connection conexion) {
+        this.conexion = conexion;
     }
 
     public boolean comprarButaca(CompraButaca compra) {
@@ -100,7 +100,7 @@ public class CompraButacaDAO {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                CompraButaca compra = new CompraButaca();
+                CompraButaca compra = null;
                 compra.setId(rs.getInt("id"));
                 compra.setIdSesion(rs.getInt("id_sesion"));
                 compra.setIdCliente(rs.getInt("id_cliente"));
@@ -176,7 +176,7 @@ public class CompraButacaDAO {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                CompraButaca compra = new CompraButaca();
+                CompraButaca compra = null;
                 compra.setId(rs.getInt("id"));
                 compra.setIdSesion(rs.getInt("id_sesion"));
                 compra.setIdCliente(rs.getInt("id_cliente"));

@@ -71,24 +71,22 @@ public class Salas_peliculas {
         int columnas = sala.getNumeroColumnas(); 
         char[][] matriz = new char[filas][columnas];
 
-        // Inicializa todos vacíos
+   
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 matriz[i][j] = ' ';
             }
         }
 
-        // Asientos para discapacidad (fila 0, cada 2 columnas)
         for (int j = 0; j < columnas; j++) {
             if (j % 2 == 0) {
                 matriz[0][j] = 'D';
             }
         }
 
-        // Asientos normales (de fila 1 en adelante)
         for (int i = 1; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                if (j != columnas / 2) { // solo un pasillo estrecho en el centro
+                if (j != columnas / 2) {
                     matriz[i][j] = '█';
                 }
             }

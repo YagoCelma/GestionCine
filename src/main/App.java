@@ -30,6 +30,7 @@ public class App {
         String emp = "empleado";
         String contraEmp = "empleado123";
         
+        CineConfig.cargarDatos();
     // Verificación de conexión inicial
         try (Connection conn = ConexionDB.getConnection()) {
             if (conn != null) {
