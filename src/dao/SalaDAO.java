@@ -28,7 +28,7 @@ public class SalaDAO {
     public boolean borrarSala(int id){
 
         try(Connection conn = ConexionDB.getConnection()){
-            String sql = "DELETE FROM sala WHERE id = ?";
+            String sql = "DELETE FROM sala WHERE id_sala = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -45,7 +45,7 @@ public class SalaDAO {
 
         Sala sala = null;
         try(Connection conn = ConexionDB.getConnection()){
-            String sql = "SELECT * FROM sala WHERE id = ?";
+            String sql = "SELECT * FROM sala WHERE id_sala = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -69,7 +69,7 @@ public class SalaDAO {
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()){
                 Sala sala = new Sala();
-                sala.setId(resultSet.getInt("id"));
+                sala.setId(resultSet.getInt("id_sala"));
                 sala.setNumeroFilas(resultSet.getInt("numeroFilas"));
                 sala.setNumeroColumnas(resultSet.getInt("numeroColumnas"));
             }

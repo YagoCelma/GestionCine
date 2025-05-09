@@ -20,6 +20,10 @@ public class App {
         EntradasView entradasView = new EntradasView();
         Salas_peliculasView salas_peliculasView = new Salas_peliculasView();
         CineConfigEditor cineConfigEditor = new CineConfigEditor();
+        FlujoCajaView flujoCajaView = new FlujoCajaView();
+        InventarioProductosView inventarioProductosView = new InventarioProductosView();
+        PedidoView pedidoView = new PedidoView();
+        ProductoView productoView = new ProductoView();
 
         Scanner sc = new Scanner(System.in);
         int resp ; 
@@ -73,7 +77,11 @@ public class App {
                             System.out.println("6. Inventario peliculas");
                             System.out.println("7. Salas y peliculas ");
                             System.out.println("8. Configuración del cine");
-                            System.out.println("9. Salir");
+                            System.out.println("9. Flujo de caja");
+                            System.out.println("10. Inventario productos");
+                            System.out.println("11. Pedidos");
+                            System.out.println("12. Productos");
+                            System.out.println("13. Salir");
                             System.out.print("Seleccione una opción: ");
                             opcion = sc.nextInt();
                             sc.nextLine();
@@ -87,10 +95,14 @@ public class App {
                                 case 6 -> inventarioPeliculaView.menuPrincipal();
                                 case 7 -> salas_peliculasView.gestionSalas_Peliculas();
                                 case 8 ->cineConfigEditor.configuración();
-                                case 9-> System.out.println("Hasta pronto...");
+                                case 9 ->flujoCajaView.mostrarMenu();
+                                case 10 ->inventarioProductosView.menuInventarioproductos();
+                                case 11 ->pedidoView.menuPedido();
+                                case 12 ->productoView.menuProducto();
+                                case 13-> System.out.println("Hasta pronto...");
                                 default->System.out.println("Valor no valido, vuelve a intentarlo");
                             }
-                        }while(opcion != 9);
+                        }while(opcion != 13);
                     } else{
                         System.out.println("usuario o contraseña incorrectos");
                     }
@@ -110,7 +122,9 @@ public class App {
                             System.out.println("1. Cliente");
                             System.out.println("2. Entradas");
                             System.out.println("3. Consultar salas y peliculas");
-                            System.out.println("4. Salir");
+                            System.out.println("4. Inventario productos");
+                            System.out.println("5. Pedidos");
+                            System.out.println("6. Salir");
                             System.out.print("Seleccione una opción: ");
                             opcion2 = sc.nextInt();
                             sc.nextLine();
@@ -119,11 +133,13 @@ public class App {
                                 case 1 -> clienteView.menuCliente();
                                 case 2 -> entradasView.menuEntrada();
                                 case 3 -> salas_peliculasView.mostrar();
-                                case 4-> System.out.println("Hasta pronto...");
+                                case 4 -> inventarioProductosView.menuInventarioproductos();
+                                case 5 -> pedidoView.menuPedido();
+                                case 6-> System.out.println("Hasta pronto...");
                                 default->System.out.println("Valor no valido, vuelve a intentarlo");
                             }
 
-                        } while (opcion2 != 4);
+                        } while (opcion2 != 6);
                     }else {
                         System.out.println("usuario o contraseña incorrectos");
                     }

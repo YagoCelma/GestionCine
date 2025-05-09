@@ -1,18 +1,8 @@
 package main;
-import dao.PeliculaDAO;
-import dao.SalaDAO;
-import dao.Salas_peliculasDao;
-import model.Pelicula;
-import model.Sala;
-import model.Salas_peliculas;
- 
-import java.sql.Timestamp;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class GeneradorCartelera {
-    public void main(String[] args) {
+    public void generador() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
         
@@ -42,7 +32,7 @@ public class GeneradorCartelera {
 
     public void automatizarCartelera(){
 
-        private static final LocalTime HORA_INICIO = LocalTime.of(9, 0);
+    /*     private static final LocalTime HORA_INICIO = LocalTime.of(9, 0);
         private static final LocalTime HORA_FIN = LocalTime.of(24, 0);
         private static final int PAUSA_ENTRE_FUNCIONES_MIN = 30;
         private static final int NUM_DIAS = 7;
@@ -119,7 +109,7 @@ public class GeneradorCartelera {
         } else {
             System.out.println("✅ Cartelera generada correctamente.");
         }
-    
+    */
     }
 }
 
